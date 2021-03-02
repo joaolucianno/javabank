@@ -11,9 +11,21 @@ import java.util.Map;
  * The customer domain entity
  */
 public class Customer {
-
+    //Fields
     private AccountManager accountManager;
     private Map<Integer, Account> accounts = new HashMap<>();
+    private String name;
+
+
+    //Constructor
+
+    public Customer(String name) {
+        this.name = name;
+    }
+
+    public Customer(){
+
+    }
 
     /**
      * Sets the account manager
@@ -63,4 +75,11 @@ public class Customer {
         return balance;
     }
 
+    public int getHowManyAccounts(){
+        return accounts.size();
+    }
+
+    public String getName() {
+        return name;
+    }
 }
