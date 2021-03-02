@@ -30,7 +30,7 @@ public class Bank {
      */
     public void addCustomer(Customer customer) {
         customers.add(customer);
-        customer.setAccountManager(accountManager);
+        //customer.setAccountManager(accountManager);
     }
 
     /**
