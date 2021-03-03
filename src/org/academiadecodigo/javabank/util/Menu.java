@@ -6,18 +6,22 @@ import org.academiadecodigo.bootcamp.scanners.menu.MenuInputScanner;
 public class Menu {
     //Fields
     private final Prompt PROMPT = new Prompt(System.in, System.out);
-    private final MenuInputScanner scanner;
-    private final String[] OPTIONS;
+    private MenuInputScanner scanner;
+    private String[] OPTIONS;
 
 
-    //Constructor
-    public Menu(String[] options){
-        OPTIONS = options;
+
+
+    //Setters
+
+
+    public void setOPTIONS(String[] OPTIONS) {
+        this.OPTIONS = OPTIONS;
         scanner = new MenuInputScanner(OPTIONS);
     }
 
     //Custom Methods
-    public void showMenu(String message, String error){
+    public void prepareMenu(String message, String error){
         scanner.setMessage(message);
         scanner.setError(error);
     }

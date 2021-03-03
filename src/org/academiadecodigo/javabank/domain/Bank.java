@@ -49,5 +49,7 @@ public class Bank {
         return balance;
     }
 
-
+    public Set<Customer> getCustomers() {
+        return customers;
+    }
 }

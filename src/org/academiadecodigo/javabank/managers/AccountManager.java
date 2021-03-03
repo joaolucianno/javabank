@@ -13,7 +13,7 @@ import java.util.Map;
  */
 public class AccountManager {
 
-    private static int numberAccounts = 0;
+    private int numberAccounts = 0;
     private Map<Integer, Account> accountMap;
 
     /**
@@ -61,15 +61,16 @@ public class AccountManager {
      * @param id     the id of the account
      * @param amount the amount to withdraw
      */
-    public void withdraw(int id, double amount) {
+    public boolean withdraw(int id, double amount) {
 
         Account account = accountMap.get(id);
 
-        if (!account.canWithdraw()) {
-            return;
+        if (!account.canWithdraw(amount)) {
+            return false;
         }
 
         accountMap.get(id).debit(amount);
+        return true;
     }
 
     /**

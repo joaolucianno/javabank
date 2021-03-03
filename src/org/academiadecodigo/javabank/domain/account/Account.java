@@ -94,4 +94,8 @@ public abstract class Account {
     public boolean canWithdraw() {
         return true;
     }
+
+    public boolean canWithdraw(double amount) {
+        return canDebit(amount);
+    }
 }

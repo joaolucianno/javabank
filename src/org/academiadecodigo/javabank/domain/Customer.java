@@ -15,12 +15,13 @@ public class Customer {
     private AccountManager accountManager;
     private Map<Integer, Account> accounts = new HashMap<>();
     private String name;
-
+    private int id;
 
     //Constructor
 
-    public Customer(String name) {
+    public Customer(String name, int id) {
         this.name = name;
+        this.id = id;
     }
 
     public Customer(){
@@ -81,5 +82,13 @@ public class Customer {
 
     public String getName() {
         return name;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public AccountManager getAccountManager() {
+        return accountManager;
     }
 }
