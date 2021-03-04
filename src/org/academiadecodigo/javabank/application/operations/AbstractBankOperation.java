@@ -1,7 +1,7 @@
 package org.academiadecodigo.javabank.application.operations;
 
 import org.academiadecodigo.javabank.application.BankApplication;
-import org.academiadecodigo.javabank.domain.Customer;
+import org.academiadecodigo.javabank.model.domain.Customer;
 
 /**
  * A generic bank operation to be used as a base for concrete types of bank operations

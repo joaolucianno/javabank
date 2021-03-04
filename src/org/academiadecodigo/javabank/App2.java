@@ -1,14 +1,14 @@
 package org.academiadecodigo.javabank;
 
-import org.academiadecodigo.javabank.application.BankApplication;
 import org.academiadecodigo.javabank.model.domain.Bank;
 import org.academiadecodigo.javabank.model.domain.Customer;
 import org.academiadecodigo.javabank.model.managers.AccountManager;
 
-public class App {
-
+public class App2 {
     public static void main(String[] args) {
+        //Fields
 
+        //TEST
         Bank bank = new Bank();
         AccountManager accountManager = new AccountManager();
         bank.setAccountManager(accountManager);
@@ -20,7 +20,9 @@ public class App {
         bank.addCustomer(c2);
         bank.addCustomer(c3);
 
-        BankApplication bankApplication = new BankApplication(bank);
-        bankApplication.start();
+        //EXERCISE
+
+
+
     }
 }

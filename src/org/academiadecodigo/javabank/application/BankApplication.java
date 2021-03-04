@@ -1,14 +1,14 @@
 package org.academiadecodigo.javabank.application;
 
-import org.academiadecodigo.bootcamp.Prompt;
-import org.academiadecodigo.bootcamp.scanners.integer.IntegerSetInputScanner;
 import org.academiadecodigo.bootcamp.scanners.menu.MenuInputScanner;
 import org.academiadecodigo.javabank.application.operations.BalanceOperation;
 import org.academiadecodigo.javabank.application.operations.NewAccountOperation;
 import org.academiadecodigo.javabank.application.operations.Operation;
 import org.academiadecodigo.javabank.application.operations.transaction.DepositOperation;
 import org.academiadecodigo.javabank.application.operations.transaction.WithdrawOperation;
-import org.academiadecodigo.javabank.domain.Bank;
+import org.academiadecodigo.javabank.model.domain.Bank;
+import org.academiadecodigo.javabank.presenter.PresenterLogin;
+import org.academiadecodigo.javabank.presenter.PresenterMenu;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -18,12 +18,13 @@ import java.util.Map;
  */
 public class BankApplication {
 
-    private Prompt prompt;
-    private MenuInputScanner mainMenu;
     private Map<Integer, Operation> operationsMap;
-
     private Bank bank;
     private int accessingCustomerId;
+
+    //Exercise
+    private PresenterLogin login;
+    private PresenterMenu menu;
 
     /**
      * Creates a new instance of a {@code BankApplication}, initializes it with the given {@link Bank}
@@ -32,7 +33,10 @@ public class BankApplication {
      */
     public BankApplication(Bank bank) {
         this.bank = bank;
-        this.prompt = new Prompt(System.in, System.out);
+        this.login = new PresenterLogin(bank);
+        this.menu = new PresenterMenu(bank, this);
+
+
     }
 
     /**
@@ -40,9 +44,9 @@ public class BankApplication {
      *
      * @return the prompt
      */
-    public Prompt getPrompt() {
-        return prompt;
-    }
+//    public Prompt getPrompt() {
+//        return prompt;
+//    }
 
     /**
      * Gets the bank used by this application
@@ -59,6 +63,7 @@ public class BankApplication {
      * @return the customer id
      */
     public int getAccessingCustomerId() {
+
         return accessingCustomerId;
     }
 
@@ -66,52 +71,49 @@ public class BankApplication {
      * Starts the bank application
      */
     public void start() {
-
-        mainMenu = buildMainMenu();
-
-        accessingCustomerId = scanCustomerId();
-        operationsMap = buildOperationsMap();
+        accessingCustomerId = login.verifyLogin();
         menuLoop();
     }
 
     private void menuLoop() {
 
-        int userChoice = prompt.getUserInput(mainMenu);
+        menu.userChoice();
 
-        if (userChoice == UserOptions.QUIT.getOption()) {
-            return;
-        }
+//        if (userChoice == UserOptions.QUIT.getOption()) {
+//
+//            return;
+//        }
 
-        operationsMap.get(userChoice).execute();
+
         menuLoop();
     }
 
-    private int scanCustomerId() {
+//    private int scanCustomerId() {
+//
+//        IntegerSetInputScanner scanner = new IntegerSetInputScanner(bank.getCustomerIds());
+//        scanner.setMessage(Messages.CHOOSE_CUSTOMER);
+//        scanner.setError(Messages.ERROR_INVALID_CUSTOMER);
+//
+//        return prompt.getUserInput(scanner);
+//    }
 
-        IntegerSetInputScanner scanner = new IntegerSetInputScanner(bank.getCustomerIds());
-        scanner.setMessage(Messages.CHOOSE_CUSTOMER);
-        scanner.setError(Messages.ERROR_INVALID_CUSTOMER);
+//    private MenuInputScanner buildMainMenu() {
+//
+//        MenuInputScanner mainMenu = new MenuInputScanner(UserOptions.getMessages());
+//        mainMenu.setError(Messages.ERROR_INVALID_OPTION);
+//        mainMenu.setMessage(Messages.MENU_WELCOME);
+//
+//        return mainMenu;
+//    }
 
-        return prompt.getUserInput(scanner);
-    }
-
-    private MenuInputScanner buildMainMenu() {
-
-        MenuInputScanner mainMenu = new MenuInputScanner(UserOptions.getMessages());
-        mainMenu.setError(Messages.ERROR_INVALID_OPTION);
-        mainMenu.setMessage(Messages.MENU_WELCOME);
-
-        return mainMenu;
-    }
-
-    private Map<Integer, Operation> buildOperationsMap() {
-
-        Map<Integer, Operation> map = new HashMap<>();
-        map.put(UserOptions.GET_BALANCE.getOption(), new BalanceOperation(this));
-        map.put(UserOptions.DEPOSIT.getOption(), new DepositOperation(this));
-        map.put(UserOptions.WITHDRAW.getOption(), new WithdrawOperation(this));
-        map.put(UserOptions.OPEN_ACCOUNT.getOption(), new NewAccountOperation(this));
-
-        return map;
-    }
+//    private Map<Integer, Operation> buildOperationsMap() {
+//
+//        Map<Integer, Operation> map = new HashMap<>();
+//        map.put(UserOptions.GET_BALANCE.getOption(), new BalanceOperation(this));
+//        map.put(UserOptions.DEPOSIT.getOption(), new DepositOperation(this));
+//        map.put(UserOptions.WITHDRAW.getOption(), new WithdrawOperation(this));
+//        map.put(UserOptions.OPEN_ACCOUNT.getOption(), new NewAccountOperation(this));
+//
+//        return map;
+//    }
 }

@@ -6,7 +6,7 @@ import org.academiadecodigo.bootcamp.scanners.precisiondouble.DoubleInputScanner
 import org.academiadecodigo.javabank.application.BankApplication;
 import org.academiadecodigo.javabank.application.Messages;
 import org.academiadecodigo.javabank.application.operations.AbstractBankOperation;
-import org.academiadecodigo.javabank.managers.AccountManager;
+import org.academiadecodigo.javabank.model.managers.AccountManager;
 
 /**
  * A generic account transaction to be used as a base for concrete transaction implementations
@@ -23,7 +23,7 @@ public abstract class AbstractAccountTransactionOperation extends AbstractBankOp
      */
     public AbstractAccountTransactionOperation(BankApplication bankApplication) {
         super(bankApplication);
-        prompt = bankApplication.getPrompt();
+        //prompt = bankApplication.getPrompt();
         accountManager = bankApplication.getBank().getAccountManager();
     }
 
