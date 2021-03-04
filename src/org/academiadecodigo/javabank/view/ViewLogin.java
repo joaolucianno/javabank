@@ -1,5 +1,7 @@
 package org.academiadecodigo.javabank.view;
 
+import org.academiadecodigo.javabank.model.domain.Customer;
+
 import static org.academiadecodigo.javabank.application.Messages.*;
 
 public class ViewLogin {
@@ -14,9 +16,10 @@ public class ViewLogin {
         PromptIntegerIO.error();
     }
 
-    public void printMessage(String message){
-        System.out.println(message);
+    public void printMessage(String name){
+        System.out.println(name + ", " + MENU_WELCOME + ". You are " +LOGGED);
     }
+
 
 
 

@@ -18,13 +18,13 @@ public class PresenterLogin extends AbsPresenter{
     //Custom Methods
     public int verifyLogin(){
         int id = viewLogin.showLogin();
-        Customer user; user = bank.getCustomer(id);
+        Customer user = bank.getCustomer(id);
         if(user == null){
             viewLogin.showError();
             verifyLogin();
             return -1;
         }
-        viewLogin.printMessage(SUCCESSFUL);
+        viewLogin.printMessage(user.getName());
         return id;
     }
 

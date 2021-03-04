@@ -4,10 +4,7 @@ import org.academiadecodigo.javabank.model.domain.account.Account;
 import org.academiadecodigo.javabank.model.domain.account.AccountType;
 import org.academiadecodigo.javabank.model.managers.AccountManager;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 /**
  * The customer domain entity
@@ -62,8 +59,13 @@ public class Customer {
      *
      * @return the accounts
      */
-    public Set<Account> getAccounts() {
-        return new HashSet<>(accounts.values());
+    public List<Account> getAccounts() {
+        List<Account> accs = new LinkedList<>();
+        for (Integer integer : accounts.keySet()) {
+            accs.add(accounts.get(integer));
+        }
+        return accs;
+        //return new HashSet<>(accounts.values());
     }
 
     /**

@@ -10,4 +10,19 @@ public class ViewMenu {
         PromptMenu.prepareMenu(MENU, ERROR_INVALID_OPTION);
         return PromptMenu.getUserInputMenu();
     }
+
+    public void quit(){
+        try{
+            System.out.print(EXIT);
+            Thread.sleep(500);
+            System.out.print(".");
+            Thread.sleep(500);
+            System.out.print(".");
+            Thread.sleep(500);
+            System.out.print(".");
+        } catch (InterruptedException ignore){}
+        finally {
+            System.exit(0);
+        }
+    }
 }

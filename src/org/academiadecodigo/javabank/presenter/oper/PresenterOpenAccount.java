@@ -12,15 +12,15 @@ public class PresenterOpenAccount extends AbsPresenterOper {
     private final ViewOpenAccount viewOpenAccount = new ViewOpenAccount();
 
     //Constructor
-    public PresenterOpenAccount(Bank bank, BankApplication bankApplication) {
-        super(bank, bankApplication);
+    public PresenterOpenAccount(Bank bank, BankApplication bankApplication, Customer customer) {
+        super(bank, bankApplication, customer);
     }
 
     //Custom Methods
 
     @Override
     public void execute() {
-        Customer customer = bankApplication.getBank().getCustomer(bankApplication.getAccessingCustomerId());
+        //Customer customer = bankApplication.getBank().getCustomer(bankApplication.getAccessingCustomerId());
         int accountId = customer.openAccount(AccountType.CHECKING);
         viewOpenAccount.showOpenAccount(accountId);
 

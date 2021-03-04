@@ -23,12 +23,14 @@ public class Messages {
     public final static String BALANCE_MESSAGE = " balance ";
     public final static String BALANCE_TOTAL_MESSAGE = "Total Balance: ";
 
+    public static final String LOGGED = GREEN + "Logged in\n" + RESET;
     public static final String SUCCESSFUL = GREEN + "Resquest successful\n" + RESET;
+    public static final String EXIT = RED + "\nExit";
 
-    public final static String ERROR_INVALID_OPTION = "That is an invalid option";
+    public final static String ERROR_INVALID_OPTION = RED + "That is an invalid option" + RESET;
     public final static String ERROR_INVALID_CUSTOMER = RED + "You do not seem to be a valid customer\n" + RESET;
-    public final static String ERROR_NO_ACCOUNT = "Open a bank account first, please!";
-    public final static String ERROR_INVALID_ACCOUNT = "That is an invalid account!";
-    public final static String ERROR_INVALID_AMOUNT = "That is an invalid amount!";
+    public final static String ERROR_NO_ACCOUNT = RED + "Open a bank account first, please!" + RESET;
+    public final static String ERROR_INVALID_ACCOUNT = RED + "That is an invalid account!" + RESET;
+    public final static String ERROR_INVALID_AMOUNT = RED + "That is an invalid amount!" + RESET;
 
 }

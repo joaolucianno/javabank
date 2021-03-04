@@ -72,6 +72,7 @@ public class BankApplication {
      */
     public void start() {
         accessingCustomerId = login.verifyLogin();
+
         menuLoop();
     }
 

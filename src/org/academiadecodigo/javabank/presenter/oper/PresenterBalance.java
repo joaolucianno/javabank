@@ -2,10 +2,9 @@ package org.academiadecodigo.javabank.presenter.oper;
 
 import org.academiadecodigo.javabank.application.BankApplication;
 import org.academiadecodigo.javabank.model.domain.Bank;
-import org.academiadecodigo.javabank.model.domain.account.Account;
+import org.academiadecodigo.javabank.model.domain.Customer;
 import org.academiadecodigo.javabank.view.ViewBalance;
 
-import java.util.Set;
 
 public class PresenterBalance extends AbsPresenterOper {
     //Fields
@@ -13,18 +12,19 @@ public class PresenterBalance extends AbsPresenterOper {
 
 
     //Constructor
-    public PresenterBalance(Bank bank, BankApplication bankApplication) {
-        super(bank, bankApplication);
+    public PresenterBalance(Bank bank, BankApplication bankApplication, Customer customer) {
+        super(bank, bankApplication, customer);
     }
 
     //Custom Methods
     @Override
     public void execute() {
-        Set<Account> accounts = bankApplication.getBank()
-                .getCustomer(bankApplication.getAccessingCustomerId())
-                .getAccounts();
+        if(!hasAccount()){
+            viewBalance.error();
+            return;
+        }
 
-        viewBalance.showBalance(accounts);
+        viewBalance.showBalance(customer.getAccounts());
     }
 
 }
