@@ -7,6 +7,10 @@ import org.academiadecodigo.javabank.controller.transaction.WithdrawalController
 import org.academiadecodigo.javabank.managers.AccountManager;
 import org.academiadecodigo.javabank.model.Bank;
 import org.academiadecodigo.javabank.model.Customer;
+import org.academiadecodigo.javabank.services.AccountHandler;
+import org.academiadecodigo.javabank.services.AuthHandler;
+import org.academiadecodigo.javabank.services.CustomerHandler;
+import org.academiadecodigo.javabank.services.CustomerService;
 import org.academiadecodigo.javabank.view.*;
 
 import java.util.HashMap;
@@ -22,20 +26,20 @@ public class Bootstrap {
      *
      * @return the bank
      */
-    public Bank generateTestData() {
+    public CustomerService generateTestData() {
+        CustomerService customerService = new CustomerHandler(new Bank());
 
-        Bank bank = new Bank();
-        AccountManager accountManager = new AccountManager();
-        bank.setAccountManager(accountManager);
+        //Bank bank = new Bank();
+        //bank.setAccountManager(accountManager);
 
         Customer c1 = new Customer(1, "Rui");
         Customer c2 = new Customer(2, "Sergio");
         Customer c3 = new Customer(3, "Bruno");
-        bank.addCustomer(c1);
-        bank.addCustomer(c2);
-        bank.addCustomer(c3);
+        customerService.add(c1);
+        customerService.add(c2);
+        customerService.add(c3);
 
-        return bank;
+        return customerService;
     }
 
     /**
@@ -48,6 +52,10 @@ public class Bootstrap {
 
         // attach all input to standard i/o
         Prompt prompt = new Prompt(System.in, System.out);
+
+
+
+
 
         // wire login controller and view
         LoginController loginController = new LoginController();

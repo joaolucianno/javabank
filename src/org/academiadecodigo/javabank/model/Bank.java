@@ -3,6 +3,8 @@ package org.academiadecodigo.javabank.model;
 import org.academiadecodigo.javabank.managers.AccountManager;
 
 import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -64,6 +66,10 @@ public class Bank {
      */
     public Set<Integer> getCustomerIds() {
         return customers.keySet();
+    }
+
+    public List<Customer> getCustomers(){
+        return new LinkedList<>(customers.values());
     }
 
     /**

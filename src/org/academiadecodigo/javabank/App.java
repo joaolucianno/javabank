@@ -16,7 +16,7 @@ public class App {
     private void bootStrap() {
 
         Bootstrap bootstrap = new Bootstrap();
-        bank = bootstrap.generateTestData();
+        //bank = bootstrap.generateTestData();
 
         LoginController loginController = bootstrap.wireObjects(bank);
 

@@ -1,11 +1,11 @@
 package org.academiadecodigo.javabank.managers;
 
 import org.academiadecodigo.javabank.factories.AccountFactory;
+import org.academiadecodigo.javabank.model.Customer;
 import org.academiadecodigo.javabank.model.account.Account;
 import org.academiadecodigo.javabank.model.account.AccountType;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Responsible for managing accounts
@@ -80,4 +80,9 @@ public class AccountManager {
             dstAccount.credit(amount);
         }
     }
+
+//    public List<Customer> getAccounts(){
+//        List<Account> list = accountMap.values();
+//        return ;
+//    }
 }
