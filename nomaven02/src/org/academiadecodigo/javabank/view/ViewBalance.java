@@ -16,12 +16,13 @@ public class ViewBalance {
 //            System.out.println(Messages.ERROR_NO_ACCOUNT);
 //            return;
 //        }
-
+        double total = 0d;
         System.out.println(Color.CYAN + "\nBalance of all accounts" + Color.RESET);
         for (Account account : accounts) {
             System.out.println(account.getId() + "\t" + account.getAccountType() + "\t" + df.format(account.getBalance()));
+            total += account.getBalance();
         }
-
+        System.out.println(Color.CYAN + "\nTOTAL: " + df.format(total) + Color.RESET);
     }
 
     public void error(){

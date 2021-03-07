@@ -14,7 +14,7 @@ public class Customer {
     private int id;
     private String name;
 
-    private AccountManager accountManager;
+    //private AccountManager accountManager;
     private Map<Integer, Account> accounts = new HashMap<>();
 
     /**
@@ -50,22 +50,19 @@ public class Customer {
      *
      * @param accountManager the account manager to set
      */
-    public void setAccountManager(AccountManager accountManager) {
-        this.accountManager = accountManager;
-    }
+//    public void setAccountManager(AccountManager accountManager) {
+//        this.accountManager = accountManager;
+//    }
 
     /**
      * Gets the customer accounts
      *
      * @return the accounts
      */
-    public List<Account> getAccounts() {
-        List<Account> accs = new LinkedList<>();
-        for (Integer integer : accounts.keySet()) {
-            accs.add(accounts.get(integer));
-        }
-        return accs;
-        //return new HashSet<>(accounts.values());
+    public Set<Integer> getAccounts() {
+        
+        return accounts.keySet();
+
     }
 
     /**
@@ -73,9 +70,9 @@ public class Customer {
      *
      * @return the accounts ids
      */
-    public Set<Integer> getAccountIds() {
-        return accounts.keySet();
-    }
+//    public Set<Integer> getAccountIds() {
+//        return accounts.keySet();
+//    }
 
     /**
      * Gets the balance of an {@link Account}
@@ -83,24 +80,24 @@ public class Customer {
      * @param id the id of the account
      * @return the account balance
      */
-    public double getBalance(int id) {
-        return accounts.get(id).getBalance();
-    }
+//    public double getBalance(int id) {
+//        return accounts.get(id).getBalance();
+//    }
 
     /**
      * Gets the total customer balance
      *
      * @return the balance
      */
-    public double getBalance() {
-
-        double balance = 0;
-        for (Account account : accounts.values()) {
-            balance += account.getBalance();
-        }
-
-        return balance;
-    }
+//    public double getBalance() {
+//
+//        double balance = 0;
+//        for (Account account : accounts.values()) {
+//            balance += account.getBalance();
+//        }
+//
+//        return balance;
+//    }
 
     /**
      * Opens a new account
@@ -109,11 +106,11 @@ public class Customer {
      * @return the new account id
      * @see AccountManager#openAccount(AccountType)
      */
-    public int openAccount(AccountType accountType) {
-        Account account = accountManager.openAccount(accountType);
-        accounts.put(account.getId(), account);
-        return account.getId();
-    }
+//    public int openAccount(AccountType accountType) {
+//        Account account = accountManager.openAccount(accountType);
+//        accounts.put(account.getId(), account);
+//        return account.getId();
+//    }
 }
 
 

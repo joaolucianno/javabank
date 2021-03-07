@@ -1,10 +1,6 @@
 package org.academiadecodigo.javabank.application;
 
-import org.academiadecodigo.javabank.application.operations.BalanceOperation;
-import org.academiadecodigo.javabank.application.operations.NewAccountOperation;
 import org.academiadecodigo.javabank.application.operations.Operation;
-import org.academiadecodigo.javabank.application.operations.transaction.DepositOperation;
-import org.academiadecodigo.javabank.application.operations.transaction.WithdrawOperation;
 
 /**
  * The possible {@link Operation} types
@@ -12,22 +8,22 @@ import org.academiadecodigo.javabank.application.operations.transaction.Withdraw
 public enum UserOptions {
 
     /**
-     * @see BalanceOperation
+     * @see
      */
     GET_BALANCE(1, Messages.MENU_GET_BALANCE),
 
     /**
-     * @see DepositOperation
+     * @see
      */
     DEPOSIT(2, Messages.MENU_DEPOSIT),
 
     /**
-     * @see WithdrawOperation
+     * @see
      */
     WITHDRAW(3, Messages.MENU_WITHDRAW),
 
     /**
-     * @see NewAccountOperation
+     * @see
      */
     OPEN_ACCOUNT(4, Messages.MENU_OPEN_ACCOUNT),
 

@@ -4,12 +4,12 @@ import org.academiadecodigo.javabank.model.domain.Customer;
 
 import java.util.HashMap;
 
-public class DBBank {
+public class DBCustomer {
     //Fields
     private HashMap<Integer, Customer> customers;
 
     //Constructor
-    public DBBank(){
+    public DBCustomer(){
         customers = new HashMap<>();
     }
 

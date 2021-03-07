@@ -44,16 +44,16 @@ public class Bank {
      *
      * @return the bank total balance
      */
-    public double getBalance() {
-
-        double balance = 0;
-
-        for (Customer customer : customers.values()) {
-            balance += customer.getBalance();
-        }
-
-        return balance;
-    }
+//    public double getBalance() {
+//
+//        double balance = 0;
+//
+//        for (Customer customer : customers.values()) {
+//            balance += customer.getBalance();
+//        }
+//
+//        return balance;
+//    }
 
     /**
      * Gets the account manager
@@ -79,8 +79,8 @@ public class Bank {
      * @param customer the new bank customer
      * @see Customer#setAccountManager(AccountManager)
      */
-    public void addCustomer(Customer customer) {
-        customers.put(customer.getId(), customer);
-        customer.setAccountManager(accountManager);
-    }
+//    public void addCustomer(Customer customer) {
+//        customers.put(customer.getId(), customer);
+//        customer.setAccountManager(accountManager);
+//    }
 }

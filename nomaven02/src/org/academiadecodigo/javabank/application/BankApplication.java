@@ -1,16 +1,14 @@
 package org.academiadecodigo.javabank.application;
 
-import org.academiadecodigo.bootcamp.scanners.menu.MenuInputScanner;
-import org.academiadecodigo.javabank.application.operations.BalanceOperation;
-import org.academiadecodigo.javabank.application.operations.NewAccountOperation;
 import org.academiadecodigo.javabank.application.operations.Operation;
-import org.academiadecodigo.javabank.application.operations.transaction.DepositOperation;
-import org.academiadecodigo.javabank.application.operations.transaction.WithdrawOperation;
 import org.academiadecodigo.javabank.model.domain.Bank;
+import org.academiadecodigo.javabank.model.domain.Customer;
+import org.academiadecodigo.javabank.model.domain.DBCustomer;
 import org.academiadecodigo.javabank.presenter.PresenterLogin;
 import org.academiadecodigo.javabank.presenter.PresenterMenu;
+import org.academiadecodigo.javabank.services.AuthHandler;
+import org.academiadecodigo.javabank.services.CustomerHandler;
 
-import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -19,22 +17,26 @@ import java.util.Map;
 public class BankApplication {
 
     private Map<Integer, Operation> operationsMap;
-    private Bank bank;
+    //private Bank bank;
     private int accessingCustomerId;
 
     //Exercise
     private PresenterLogin login;
     private PresenterMenu menu;
+    private AuthHandler authHandler = new AuthHandler();
+    private CustomerHandler customerHandler;
 
     /**
      * Creates a new instance of a {@code BankApplication}, initializes it with the given {@link Bank}
      *
-     * @param bank the bank instance
+     * @param
      */
-    public BankApplication(Bank bank) {
-        this.bank = bank;
-        this.login = new PresenterLogin(bank);
-        this.menu = new PresenterMenu(bank, this);
+    public BankApplication(DBCustomer dbCustomer) {
+        customerHandler = new CustomerHandler(dbCustomer);
+        authHandler.setCustomerHandler(customerHandler);
+        login = new PresenterLogin();
+        login.setAuthHandler(authHandler);
+        menu = new PresenterMenu(authHandler);
 
 
     }
@@ -53,19 +55,18 @@ public class BankApplication {
      *
      * @return the bank
      */
-    public Bank getBank() {
-        return bank;
-    }
+//    public Bank getBank() {
+//        return bank;
+//    }
 
     /**
      * Gets the id of the customer using the Bank Application
      *
      * @return the customer id
      */
-    public int getAccessingCustomerId() {
-
-        return accessingCustomerId;
-    }
+//    public int getAccessingCustomerId() {
+//        return accessingCustomerId;
+//    }
 
     /**
      * Starts the bank application

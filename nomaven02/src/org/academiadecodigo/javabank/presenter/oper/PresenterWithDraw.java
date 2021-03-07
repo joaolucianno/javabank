@@ -13,15 +13,15 @@ public class PresenterWithDraw extends AbsPresenterOper {
     private final ViewWithDraw viewWithDraw = new ViewWithDraw();
 
     //Constructor
-    public PresenterWithDraw(Bank bank, BankApplication bankApplication, Customer customer) {
-        super(bank, bankApplication, customer);
+    public PresenterWithDraw(Customer customer) {
+        super(customer);
     }
 
     //Custom Methods
 
     @Override
     public void execute() {
-        if (!hasAccount()) {
+        /*if (!hasAccount()) {
             viewWithDraw.error(1);
             return;
         }
@@ -40,7 +40,7 @@ public class PresenterWithDraw extends AbsPresenterOper {
             return;
         }
 
-        bank.getAccountManager().withdraw(accountId, amount);
+        bank.getAccountManager().withdraw(accountId, amount);*/
 
 
     }

@@ -1,21 +1,31 @@
 package org.academiadecodigo.javabank.services;
 
+import org.academiadecodigo.javabank.model.domain.DBAccount;
 import org.academiadecodigo.javabank.model.domain.account.Account;
 
 public class AccountHandler implements AccountService{
     //Fields
+    private DBAccount dbAccount = new DBAccount();
 
     //Constructor
     public AccountHandler(){
-        //dbClient = new DBClient();
+
     }
 
     //Getters
+    public DBAccount getDbAccount() {
+        return dbAccount;
+    }
+
+
+    //Setters
+
+
 
     //Custom Methods
     @Override
     public void add(Account account) {
-
+        dbAccount.getAccounts().put(account.getId(), account);
     }
 
     @Override
