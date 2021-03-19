@@ -1,5 +1,6 @@
 package org.academiadecodigo.javabank.model.account;
 
+import org.academiadecodigo.javabank.model.Customer;
 import org.academiadecodigo.javabank.model.Model;
 
 /**
@@ -14,6 +15,13 @@ public interface Account extends Model {
      * @return the account balance
      */
     double getBalance();
+
+    /**
+     * Sets the account costumer
+     *
+     * @param customer the customer to set
+     */
+    void setCustomer(Customer customer);
 
     /**
      * Gets the account type

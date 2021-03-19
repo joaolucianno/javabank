@@ -1,16 +1,36 @@
 package org.academiadecodigo.javabank.model;
 
+import org.academiadecodigo.javabank.model.account.AbstractAccount;
 import org.academiadecodigo.javabank.model.account.Account;
 
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * The customer model entity
  */
+@Entity
+@Table(name = "customer")
 public class Customer extends AbstractModel {
 
     private String name;
+
+    @OneToMany(
+            // propagate changes on customer entity to account entities
+            cascade = {CascadeType.ALL},
+
+            // make sure to remove accounts if unlinked from customer
+            orphanRemoval = true,
+
+            // user customer foreign key on account table to establish
+            // the many-to-one relationship instead of a join table
+            mappedBy = "customer",
+
+            // fetch accounts from database together with user
+            fetch = FetchType.EAGER,
+            targetEntity = AbstractAccount.class
+    )
     private List<Account> accounts = new ArrayList<>();
 
     /**
@@ -47,6 +67,7 @@ public class Customer extends AbstractModel {
      */
     public void addAccount(Account account) {
         accounts.add(account);
+        account.setCustomer(this);
     }
 
     /**
@@ -56,6 +77,18 @@ public class Customer extends AbstractModel {
      */
     public void removeAccount(Account account) {
         accounts.remove(account);
+        account.setCustomer(null);
+    }
+
+    /**
+     * @see Object#toString()
+     */
+    @Override
+    public String toString() {
+        return "Customer{" +
+                "name='" + name + '\'' +
+                ", accounts=" + accounts +
+                "} " + super.toString();
     }
 }
 

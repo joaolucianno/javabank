@@ -1,20 +1,47 @@
 package org.academiadecodigo.javabank.model.account;
 
 import org.academiadecodigo.javabank.model.AbstractModel;
+import org.academiadecodigo.javabank.model.Customer;
+
+import javax.persistence.*;
 
 /**
  * A generic account model entity to be used as a base for concrete types of accounts
- * @see Account
  */
+@Entity
+@Table(name = "account")
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "account_type")
 public abstract class AbstractAccount extends AbstractModel implements Account {
 
     private double balance = 0;
+
+    @ManyToOne
+    private Customer customer;
 
     /**
      * @see Account#getBalance()
      */
     public double getBalance() {
         return balance;
+    }
+
+    /**
+     * Gets the account costumer
+     *
+     * @return the customer
+     */
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    /**
+     * Sets the account costumer
+     *
+     * @param customer the customer to set
+     */
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
     }
 
     /**
@@ -38,7 +65,7 @@ public abstract class AbstractAccount extends AbstractModel implements Account {
      * Debits the account if possible
      *
      * @param amount the amount to debit
-     * @see Account#canDebit(double)
+     * @see Account#debit(double)
      */
     public void debit(double amount) {
         if (canDebit(amount)) {
@@ -65,5 +92,16 @@ public abstract class AbstractAccount extends AbstractModel implements Account {
      */
     public boolean canWithdraw() {
         return true;
+    }
+
+    /**
+     * @see Object#toString()
+     */
+    @Override
+    public String toString() {
+        return "AbstractAccount{" +
+                "balance=" + balance +
+                ", customerId=" + (customer != null ? customer.getId() : null) +
+                "} " + super.toString();
     }
 }

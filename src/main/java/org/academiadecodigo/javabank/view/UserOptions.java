@@ -8,7 +8,7 @@ import org.academiadecodigo.javabank.controller.transaction.WithdrawalController
 import java.util.stream.Stream;
 
 /**
- * The possible operations types
+ * The possible operation types
  */
 public enum UserOptions {
 
