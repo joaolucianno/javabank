@@ -1,5 +1,6 @@
 package org.academiadecodigo.javabank.factories;
 
+import org.academiadecodigo.javabank.model.Customer;
 import org.academiadecodigo.javabank.model.account.Account;
 import org.academiadecodigo.javabank.model.account.AccountType;
 import org.academiadecodigo.javabank.model.account.CheckingAccount;
@@ -16,12 +17,16 @@ public class AccountFactory {
      * @param accountType the account type
      * @return the new account
      */
-    public Account createAccount(AccountType accountType) {
+    public Account createAccount(AccountType accountType, Customer customer) {
 
         Account newAccount;
         switch (accountType) {
             case CHECKING:
                 newAccount = new CheckingAccount();
+                if(newAccount instanceof CheckingAccount){
+                    ((CheckingAccount) newAccount).setCustomer(customer);
+                }
+
                 break;
             case SAVINGS:
                 newAccount = new SavingsAccount();

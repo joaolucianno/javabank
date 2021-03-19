@@ -11,6 +11,8 @@ import org.academiadecodigo.javabank.services.AuthServiceImpl;
 import org.academiadecodigo.javabank.services.CustomerServiceImpl;
 import org.academiadecodigo.javabank.view.*;
 
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -18,7 +20,7 @@ import java.util.Map;
  * Responsible for wiring the objects dependencies
  */
 public class Bootstrap {
-
+    private final EntityManagerFactory emf = Persistence.createEntityManagerFactory("userjavabank");
     private AuthServiceImpl authService;
     private CustomerServiceImpl customerService;
     private AccountServiceImpl accountService;
@@ -30,6 +32,7 @@ public class Bootstrap {
      */
     public void setAuthService(AuthServiceImpl authService) {
         this.authService = authService;
+        authService.setEmf(emf);
     }
 
     /**
@@ -39,6 +42,7 @@ public class Bootstrap {
      */
     public void setCustomerService(CustomerServiceImpl customerService) {
         this.customerService = customerService;
+        customerService.setEmf(emf);
     }
 
     /**
@@ -48,7 +52,9 @@ public class Bootstrap {
      */
     public void setAccountService(AccountServiceImpl accountService) {
         this.accountService = accountService;
+        accountService.setEmf(emf);
     }
+
 
     /**
      * Creates a {@code CustomerService} and populates it with data

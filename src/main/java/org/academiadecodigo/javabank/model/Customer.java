@@ -1,16 +1,29 @@
 package org.academiadecodigo.javabank.model;
 
+import org.academiadecodigo.javabank.model.account.AbstractAccount;
 import org.academiadecodigo.javabank.model.account.Account;
+import org.academiadecodigo.javabank.model.account.CheckingAccount;
+import org.hibernate.annotations.Cascade;
 
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * The customer model entity
  */
+@Entity
+@Table(name = "customer")
 public class Customer extends AbstractModel {
 
     private String name;
+
+    @OneToMany(
+            cascade = {CascadeType.ALL},
+            orphanRemoval = true,
+            mappedBy = "customer",
+            fetch = FetchType.EAGER,
+            targetEntity = AbstractAccount.class)
     private List<Account> accounts = new ArrayList<>();
 
     /**
@@ -37,6 +50,7 @@ public class Customer extends AbstractModel {
      * @return the accounts
      */
     public List<Account> getAccounts() {
+
         return accounts;
     }
 
@@ -47,6 +61,10 @@ public class Customer extends AbstractModel {
      */
     public void addAccount(Account account) {
         accounts.add(account);
+        if(account instanceof CheckingAccount){
+            ((CheckingAccount) account).setCustomer(this);
+        }
+
     }
 
     /**
@@ -56,6 +74,11 @@ public class Customer extends AbstractModel {
      */
     public void removeAccount(Account account) {
         accounts.remove(account);
+    }
+
+    @Override
+    public String toString() {
+        return "Name: " + getName() + "/ Id: " + getId();
     }
 }
 

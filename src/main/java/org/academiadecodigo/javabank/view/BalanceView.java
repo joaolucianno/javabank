@@ -39,7 +39,7 @@ public class BalanceView implements View {
         Customer customer = balanceController.getCustomer();
         System.out.println("\n" + customer.getName() + Messages.VIEW_BALANCE_MESSAGE + "\n");
 
-        List<Account> accounts = customer.getAccounts();
+        List<Account> accounts = balanceController.getAccounts();
         for (Account account : accounts) {
             System.out.println(account.getId() + "\t" + account.getAccountType() + "\t" + df.format(account.getBalance()));
         }
