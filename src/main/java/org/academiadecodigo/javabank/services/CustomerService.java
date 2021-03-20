@@ -1,13 +1,14 @@
 package org.academiadecodigo.javabank.services;
 
 import org.academiadecodigo.javabank.model.Customer;
+import org.academiadecodigo.javabank.model.account.Account;
 
 import java.util.Set;
 
 /**
  * Common interface for customer services, provides methods to manage customers
  */
-public interface CustomerService extends CRUDService<Customer> {
+public interface CustomerService {
 
     /**
      * Gets the balance of the customer
@@ -24,4 +25,8 @@ public interface CustomerService extends CRUDService<Customer> {
      * @return the accounts of the given customer id
      */
     Set<Integer> listCustomerAccountIds(Integer id);
+
+    Customer getCustomer(Integer id);
+
+    Customer add(Customer account);
 }

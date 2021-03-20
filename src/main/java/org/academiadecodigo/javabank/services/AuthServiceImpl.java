@@ -27,7 +27,7 @@ public class AuthServiceImpl implements AuthService {
     @Override
     public boolean authenticate(Integer id) {
 
-        Optional<Customer> customer = Optional.ofNullable(customerService.get(id));
+        Optional<Customer> customer = Optional.ofNullable(customerService.getCustomer(id));
 
         customer.ifPresent(customer1 -> accessingCustomerId = customer1.getId());
 
@@ -40,6 +40,6 @@ public class AuthServiceImpl implements AuthService {
      */
     @Override
     public Customer getAccessingCustomer() {
-        return customerService.get(accessingCustomerId);
+        return customerService.getCustomer(accessingCustomerId);
     }
 }

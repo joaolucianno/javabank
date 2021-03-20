@@ -41,7 +41,7 @@ public abstract class AbstractMockService<T extends Model> implements CRUDServic
     }
 
     /**
-     * @see CRUDService#save(AbstractModel)
+     * @see CRUDService#(AbstractModel)
      */
     @Override
     public T save(T modelObject) {

@@ -1,40 +1,34 @@
-package org.academiadecodigo.javabank.services.jpa;
+package org.academiadecodigo.javabank.services;
 
-import org.academiadecodigo.javabank.model.AbstractModel;
 import org.academiadecodigo.javabank.model.Model;
-import org.academiadecodigo.javabank.services.CRUDService;
-
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.RollbackException;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Root;
-import java.util.List;
+import org.academiadecodigo.javabank.persistence.dao.Dao;
 
 /**
  * A generic jpa service to be used as a base for concrete jpa service implementations
  * @see CRUDService
  * @param <T> the model type
  */
-public abstract class AbstractJpaService<T extends Model> implements CRUDService<T> {
+public abstract class AbstractService<T extends Model> {
+    //Fields
+    protected Dao accountDao;
+    protected Dao customerDao;
 
-    protected EntityManagerFactory emf;
-    private Class<T> modelType;
 
     /**
      * Initializes a new {@code JPA Service} instance given an entity manager factory and a model type
      *
-     * @param emf the entity manager factory
-     * @param modelType the model type
+     * @param
+     * @param
      */
-    public AbstractJpaService(EntityManagerFactory emf, Class<T> modelType) {
-        this.emf = emf;
-        this.modelType = modelType;
+    public AbstractService(Dao accountDao, Dao customerDao) {
+        this.accountDao = accountDao;
+        this.customerDao = customerDao;
     }
 
+
     /**
-     * @see CRUDService#list()
-     */
+     * @see CRUDService#()
+     *//*
     @Override
     public List<T> list() {
 
@@ -53,9 +47,9 @@ public abstract class AbstractJpaService<T extends Model> implements CRUDService
         }
     }
 
-    /**
+    *//**
      * @see CRUDService#get(Integer)
-     */
+     *//*
     @Override
     public T get(Integer id) {
 
@@ -72,9 +66,9 @@ public abstract class AbstractJpaService<T extends Model> implements CRUDService
         }
     }
 
-    /**
+    *//**
      * @see CRUDService#save(Model)
-     */
+     *//*
     @Override
     public T save(T modelObject) {
 
@@ -100,9 +94,9 @@ public abstract class AbstractJpaService<T extends Model> implements CRUDService
         }
     }
 
-    /**
+    *//**
      * @see CRUDService#delete(Integer)
-     */
+     *//*
     @Override
     public void delete(Integer id) {
 
@@ -123,5 +117,5 @@ public abstract class AbstractJpaService<T extends Model> implements CRUDService
                 em.close();
             }
         }
-    }
+    }*/
 }
