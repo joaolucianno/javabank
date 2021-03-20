@@ -1,5 +1,6 @@
 package org.academiadecodigo.javabank.persistence.dao.jpa;
 
+import org.academiadecodigo.javabank.model.Customer;
 import org.academiadecodigo.javabank.model.Model;
 import org.academiadecodigo.javabank.persistence.TransactionManager;
 import org.academiadecodigo.javabank.persistence.dao.Dao;
