@@ -26,8 +26,8 @@ public class CustomerServiceImp extends AbstractService<Customer> implements Cus
      */
     @Override
     public double getBalance(Integer id) {
-        List<Account> accounts = accountDao.List();
-        return accounts.stream().mapToDouble(Account::getBalance).sum();
+        Customer customer = customerDao.get(id);
+        return customer.getAccounts().stream().mapToDouble(Account::getBalance).sum();
 //        EntityManager em = emf.createEntityManager();
 //
 //        try {
@@ -52,7 +52,12 @@ public class CustomerServiceImp extends AbstractService<Customer> implements Cus
      */
     @Override
     public Set<Integer> listCustomerAccountIds(Integer id) {
-        List<Account> accounts = accountDao.List();
+        try{
+            Optional<Customer> customer = Optional.ofNullable(customerDao.get(id));
+
+
+        }
+        Customer customer = customerDao.get(id);
 //        EntityManager em = emf.createEntityManager();
 //
 //        try {
