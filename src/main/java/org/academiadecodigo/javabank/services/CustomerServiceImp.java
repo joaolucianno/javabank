@@ -6,6 +6,7 @@ import org.academiadecodigo.javabank.persistence.dao.Dao;
 
 import javax.persistence.EntityManagerFactory;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 /**
@@ -25,7 +26,8 @@ public class CustomerServiceImp extends AbstractService<Customer> implements Cus
      */
     @Override
     public double getBalance(Integer id) {
-        return ((List<Account>) accountDao.List()).stream().mapToDouble(Account::getBalance).sum();
+        List<Account> accounts = accountDao.List();
+        return accounts.stream().mapToDouble(Account::getBalance).sum();
 //        EntityManager em = emf.createEntityManager();
 //
 //        try {
@@ -50,7 +52,7 @@ public class CustomerServiceImp extends AbstractService<Customer> implements Cus
      */
     @Override
     public Set<Integer> listCustomerAccountIds(Integer id) {
-
+        List<Account> accounts = accountDao.List();
 //        EntityManager em = emf.createEntityManager();
 //
 //        try {
@@ -72,7 +74,8 @@ public class CustomerServiceImp extends AbstractService<Customer> implements Cus
 
     @Override
     public Customer getCustomer(Integer id) {
-        return (Customer) customerDao.get(id);
+        //Customer customer = Optional.ofNullable(customerDao.get(id));
+        return customerDao.get(id);
     }
 
     @Override

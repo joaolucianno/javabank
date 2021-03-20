@@ -25,8 +25,10 @@ public class AccountServiceImp extends AbstractService<Account> implements Accou
      */
     @Override
     public void deposit(Integer id, double amount) {
-        Account acc = (Account) accountDao.get(id);
+        Account acc = accountDao.get(id);
 
+
+        accountDao.save(acc.getBalance() + amount);
 
 //        EntityManager em = emf.createEntityManager();
 //

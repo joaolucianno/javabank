@@ -11,7 +11,7 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import java.util.List;
 
-public abstract class AbstractDao<T extends Model> implements Dao<T> {
+public abstract class AbstractDao<T extends Model> implements Dao {
     //Fields
     protected TransactionManager tm;
     protected Class<T> modelType;
@@ -46,7 +46,7 @@ public abstract class AbstractDao<T extends Model> implements Dao<T> {
     }
 
     @Override
-    public T save(T save) {
+    public <T> T save(T save) {
         try{
             tm.beginWrite();
             tm.getSm().persist(save);
@@ -56,6 +56,7 @@ public abstract class AbstractDao<T extends Model> implements Dao<T> {
         }
         return save;
     }
+
 
     @Override
     public void delete(Integer id) {
