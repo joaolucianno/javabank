@@ -4,9 +4,8 @@ import org.academiadecodigo.javabank.model.Model;
 import org.academiadecodigo.javabank.persistence.dao.Dao;
 
 /**
- * A generic jpa service to be used as a base for concrete jpa service implementations
- * @see CRUDService
- * @param <T> the model type
+ *
+ * @param <T>
  */
 public abstract class AbstractService<T extends Model> {
     //Fields
@@ -15,10 +14,9 @@ public abstract class AbstractService<T extends Model> {
 
 
     /**
-     * Initializes a new {@code JPA Service} instance given an entity manager factory and a model type
      *
-     * @param
-     * @param
+     * @param accountDao
+     * @param customerDao
      */
     public AbstractService(Dao accountDao, Dao customerDao) {
         this.accountDao = accountDao;

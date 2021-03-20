@@ -49,12 +49,19 @@ public abstract class AbstractDao<T extends Model> implements Dao {
     public <T> T save(T save) {
         try{
             tm.beginWrite();
-            tm.getSm().persist(save);
+            try {
+                Thread.sleep(20000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            T savedObject = tm.getSm().merge(save);
+            //tm.getSm().persist(savedObject);
             tm.commit();
+            return savedObject;
         } catch (RollbackException ex){
             tm.rollback();
         }
-        return save;
+        return null;
     }
 
 

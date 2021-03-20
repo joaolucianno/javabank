@@ -7,6 +7,7 @@ import org.academiadecodigo.javabank.services.AbstractService;
 import org.academiadecodigo.javabank.services.AccountService;
 
 import javax.persistence.EntityManagerFactory;
+import java.util.Optional;
 
 /**
  * A JPA {@link AccountService} implementation
@@ -21,14 +22,14 @@ public class AccountServiceImp extends AbstractService<Account> implements Accou
     }
 
     /**
-     * @see AccountService#deposit(Integer, double)
+     *
+     * @param id     the id of the account
+     * @param amount the amount to deposit
      */
-    @Override
     public void deposit(Integer id, double amount) {
         Account acc = accountDao.get(id);
-
-
-        accountDao.save(acc.getBalance() + amount);
+        acc.credit(amount);
+        accountDao.save(acc);
 
 //        EntityManager em = emf.createEntityManager();
 //
@@ -63,7 +64,9 @@ public class AccountServiceImp extends AbstractService<Account> implements Accou
      */
     @Override
     public void withdraw(Integer id, double amount) {
-
+        Account acc = accountDao.get(id);
+        acc.debit(amount);
+        accountDao.save(acc);
 //        EntityManager em = emf.createEntityManager();
 //
 //        try {

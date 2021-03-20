@@ -8,6 +8,7 @@ import javax.persistence.EntityManagerFactory;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * A JPA {@link CustomerService} implementation
@@ -52,12 +53,15 @@ public class CustomerServiceImp extends AbstractService<Customer> implements Cus
      */
     @Override
     public Set<Integer> listCustomerAccountIds(Integer id) {
-        try{
-            Optional<Customer> customer = Optional.ofNullable(customerDao.get(id));
+        Customer customer = (Customer) Optional.ofNullable(customerDao.get(id))
+                .orElseThrow(() -> new IllegalArgumentException("Customer does not exist"));
+
+        return customer.getAccounts().stream()
+                    .map(Account::getId)
+                    .collect(Collectors.toSet());
 
 
-        }
-        Customer customer = customerDao.get(id);
+
 //        EntityManager em = emf.createEntityManager();
 //
 //        try {
@@ -74,7 +78,7 @@ public class CustomerServiceImp extends AbstractService<Customer> implements Cus
 //                em.close();
 //            }
 //        }
-        return null;
+        //return null;
     }
 
     @Override
@@ -85,6 +89,6 @@ public class CustomerServiceImp extends AbstractService<Customer> implements Cus
 
     @Override
     public Customer add(Customer customer) {
-        return (Customer) customerDao.save(customer);
+        return customerDao.save(customer);
     }
 }
