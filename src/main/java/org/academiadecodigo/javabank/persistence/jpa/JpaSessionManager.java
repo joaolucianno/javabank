@@ -11,12 +11,14 @@ public class JpaSessionManager implements SessionManager {
     private EntityManagerFactory emf;
     private EntityManager em;
 
-    //Constructor
-
-
+    /**
+     *
+     * @param emf
+     */
     public JpaSessionManager(EntityManagerFactory emf) {
         this.emf = emf;
     }
+
 
     @Override
     public void startSession() {

@@ -41,10 +41,6 @@ public abstract class AbstractDao<T extends Model> implements GenericDao<T> {
             tm.commit();
         }
 
-//        Model model = tm.getSm().find(modelType, id);
-//        tm.getSm().close();
-//        return model;
-        //return tm.getSm().find(modelType, id);
     }
 
     @Override
@@ -52,7 +48,6 @@ public abstract class AbstractDao<T extends Model> implements GenericDao<T> {
         try{
             tm.beginWrite();
             T savedObject = tm.getSm().merge(save);
-            //tm.getSm().persist(savedObject);
             tm.commit();
             return savedObject;
         } catch (RollbackException ex){
@@ -64,6 +59,13 @@ public abstract class AbstractDao<T extends Model> implements GenericDao<T> {
 
     @Override
     public void delete(Integer id) {
-
+        try{
+            tm.beginRead();
+            T foundObject = tm.getSm().find(modelType, id);
+            tm.getSm().remove(foundObject);
+            tm.commit();
+        } catch (RollbackException ex){
+            tm.rollback();
+        }
     }
 }

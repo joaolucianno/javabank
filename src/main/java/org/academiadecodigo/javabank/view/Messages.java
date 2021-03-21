@@ -14,7 +14,7 @@ public class Messages {
     public final static String VIEW_MAIN_ERROR = "ERROR: That is an invalid option";
     public final static String VIEW_MAIN_MESSAGE = "Please choose an option ";
 
-    public final static String VIEW_BALANCE_MESSAGE = " balance: ";
+    public final static String VIEW_BALANCE_MESSAGE = " balance ";
     public final static String VIEW_BALANCE_TOTAL_MESSAGE = "Total Balance: ";
 
     public final static String VIEW_NEW_ACCOUNT_MESSAGE = "Created new account: ";

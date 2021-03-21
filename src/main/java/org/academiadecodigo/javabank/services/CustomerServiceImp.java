@@ -28,7 +28,10 @@ public class CustomerServiceImp extends AbstractService<Customer> implements Cus
      */
     @Override
     public double getBalance(Integer id) {
-        return dao.get(id)
+        Customer customer = Optional.ofNullable(dao.get(id))
+                .orElseThrow(() -> new IllegalArgumentException("Customer does not exist"));
+
+        return customer
                 .getAccounts()
                 .stream()
                 .mapToDouble(Account::getBalance)
@@ -59,7 +62,9 @@ public class CustomerServiceImp extends AbstractService<Customer> implements Cus
      */
     @Override
     public Customer getCustomer(Integer id) {
-        return dao.get(id);
+        Customer customer = Optional.ofNullable(dao.get(id))
+                .orElseThrow(() -> new IllegalArgumentException("Customer does not exist"));
+        return customer;
 
     }
 

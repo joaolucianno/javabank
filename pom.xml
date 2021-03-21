@@ -68,6 +68,14 @@
             <version>2.3.0</version>
         </dependency>
 
+        <dependency>
+            <groupId>org.academiadecodigo.simplegraphics</groupId>
+            <artifactId>simplegraphics</artifactId>
+            <version>1.0</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/src/main/resources/simplegraphics.jar</systemPath>
+        </dependency>
+
     </dependencies>
 
     <build>

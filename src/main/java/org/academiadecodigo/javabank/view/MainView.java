@@ -35,5 +35,6 @@ public class MainView extends AbstractView {
         scanner.setError(Messages.VIEW_MAIN_ERROR);
         scanner.setMessage("\n" + Messages.VIEW_MAIN_MESSAGE + mainController.getCustomerName());
         mainController.onMenuSelection(prompt.getUserInput(scanner));
+
     }
 }

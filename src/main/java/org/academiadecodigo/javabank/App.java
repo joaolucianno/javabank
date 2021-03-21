@@ -15,6 +15,7 @@ public class App {
         app.bootStrap(emf);
 
         jpa.stop();
+        System.exit(0);
 
     }
 

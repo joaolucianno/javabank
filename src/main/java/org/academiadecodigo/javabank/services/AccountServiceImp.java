@@ -1,9 +1,11 @@
 package org.academiadecodigo.javabank.services;
 
+import org.academiadecodigo.javabank.model.Customer;
 import org.academiadecodigo.javabank.model.account.Account;
 import org.academiadecodigo.javabank.persistence.dao.GenericDao;
 
 import javax.persistence.EntityManagerFactory;
+import java.util.Optional;
 
 /**
  * A JPA {@link AccountService} implementation
@@ -24,7 +26,8 @@ public class AccountServiceImp extends AbstractService<Account> implements Accou
      * @param amount the amount to deposit
      */
     public void deposit(Integer id, double amount) {
-        Account acc = dao.get(id);
+        Account acc = Optional.ofNullable(dao.get(id))
+                .orElseThrow(() -> new IllegalArgumentException("Account does not exist"));
         acc.credit(amount);
         dao.save(acc);
 
@@ -37,7 +40,8 @@ public class AccountServiceImp extends AbstractService<Account> implements Accou
      */
     @Override
     public void withdraw(Integer id, double amount) {
-        Account acc = dao.get(id);
+        Account acc = Optional.ofNullable(dao.get(id))
+                .orElseThrow(() -> new IllegalArgumentException("Account does not exist"));
         acc.debit(amount);
         dao.save(acc);
 

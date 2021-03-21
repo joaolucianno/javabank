@@ -9,7 +9,10 @@ public class JpaTransactionManager implements TransactionManager {
     //Fields
     private SessionManager sm;
 
-    //Constructor
+    /**
+     *
+     * @param sm
+     */
     public JpaTransactionManager(SessionManager sm) {
         this.sm = sm;
     }
