@@ -1,24 +1,22 @@
 package org.academiadecodigo.javabank.services;
 
-import org.academiadecodigo.javabank.model.Model;
 import org.academiadecodigo.javabank.model.account.Account;
-import org.academiadecodigo.javabank.persistence.dao.Dao;
-import org.academiadecodigo.javabank.services.AbstractService;
-import org.academiadecodigo.javabank.services.AccountService;
+import org.academiadecodigo.javabank.persistence.dao.GenericDao;
 
 import javax.persistence.EntityManagerFactory;
-import java.util.Optional;
 
 /**
  * A JPA {@link AccountService} implementation
  */
-public class AccountServiceImp extends AbstractService<Account> implements AccountService {
+public class AccountServiceImp implements AccountService {
+    //Fields
+    private GenericDao<Account> accountDao;
 
     /**
      * @see AbstractService#(EntityManagerFactory, Class)
      */
-    public AccountServiceImp(Dao accountDao, Dao custumerDao) {
-        super(accountDao, custumerDao);
+    public AccountServiceImp(GenericDao accountDao) {
+        this.accountDao = accountDao;
     }
 
     /**
@@ -139,6 +137,6 @@ public class AccountServiceImp extends AbstractService<Account> implements Accou
 
     @Override
     public Account add(Account account) {
-        return (Account) accountDao.save(account);
+        return accountDao.save(account);
     }
 }

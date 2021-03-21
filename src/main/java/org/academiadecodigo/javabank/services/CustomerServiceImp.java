@@ -2,10 +2,9 @@ package org.academiadecodigo.javabank.services;
 
 import org.academiadecodigo.javabank.model.Customer;
 import org.academiadecodigo.javabank.model.account.Account;
-import org.academiadecodigo.javabank.persistence.dao.Dao;
+import org.academiadecodigo.javabank.persistence.dao.GenericDao;
 
 import javax.persistence.EntityManagerFactory;
-import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -13,13 +12,15 @@ import java.util.stream.Collectors;
 /**
  * A JPA {@link CustomerService} implementation
  */
-public class CustomerServiceImp extends AbstractService<Customer> implements CustomerService {
+public class CustomerServiceImp implements CustomerService {
+    //Fields
+    private GenericDao<Customer> customerDao;
 
     /**
      * @see AbstractService#(EntityManagerFactory, Class)
      */
-    public CustomerServiceImp(Dao accountDao, Dao custumerDao) {
-        super(accountDao, custumerDao);
+    public CustomerServiceImp(GenericDao custumerDao) {
+        this.customerDao = custumerDao;
     }
 
     /**
@@ -27,24 +28,11 @@ public class CustomerServiceImp extends AbstractService<Customer> implements Cus
      */
     @Override
     public double getBalance(Integer id) {
-        Customer customer = customerDao.get(id);
-        return customer.getAccounts().stream().mapToDouble(Account::getBalance).sum();
-//        EntityManager em = emf.createEntityManager();
-//
-//        try {
-//
-//            Customer customer = Optional.ofNullable(em.find(Customer.class, id))
-//                .orElseThrow(() -> new IllegalArgumentException("Customer does not exist"));
-//
-//            return customer.getAccounts().stream()
-//                    .mapToDouble(Account::getBalance)
-//                    .sum();
-//
-//        } finally {
-//            if (em != null) {
-//                em.close();
-//            }
-//        }
+        return customerDao.get(id)
+                .getAccounts()
+                .stream()
+                .mapToDouble(Account::getBalance)
+                .sum();
 
     }
 
@@ -53,7 +41,7 @@ public class CustomerServiceImp extends AbstractService<Customer> implements Cus
      */
     @Override
     public Set<Integer> listCustomerAccountIds(Integer id) {
-        Customer customer = (Customer) Optional.ofNullable(customerDao.get(id))
+        Customer customer = Optional.ofNullable(customerDao.get(id))
                 .orElseThrow(() -> new IllegalArgumentException("Customer does not exist"));
 
         return customer.getAccounts().stream()

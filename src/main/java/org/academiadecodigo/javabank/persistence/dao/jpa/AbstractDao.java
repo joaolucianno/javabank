@@ -1,17 +1,15 @@
 package org.academiadecodigo.javabank.persistence.dao.jpa;
 
-import org.academiadecodigo.javabank.model.Customer;
 import org.academiadecodigo.javabank.model.Model;
 import org.academiadecodigo.javabank.persistence.TransactionManager;
-import org.academiadecodigo.javabank.persistence.dao.Dao;
+import org.academiadecodigo.javabank.persistence.dao.GenericDao;
 
 import javax.persistence.RollbackException;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Root;
 import java.util.List;
 
-public abstract class AbstractDao<T extends Model> implements Dao {
+public abstract class AbstractDao<T extends Model> implements GenericDao<T> {
     //Fields
     protected TransactionManager tm;
     protected Class<T> modelType;
@@ -25,10 +23,14 @@ public abstract class AbstractDao<T extends Model> implements Dao {
     //Custom Methods
     @Override
     public List<T> List() {
-        CriteriaBuilder builder = tm.getSm().getCriteriaBuilder();
-        CriteriaQuery criteriaQuery = builder.createQuery(modelType);
-        criteriaQuery.from(modelType);
-        return tm.getSm().createQuery(criteriaQuery).getResultList();
+        try{
+            CriteriaBuilder builder = tm.getSm().getCriteriaBuilder();
+            CriteriaQuery criteriaQuery = builder.createQuery(modelType);
+            criteriaQuery.from(modelType);
+            return tm.getSm().createQuery(criteriaQuery).getResultList();
+        } finally {
+            tm.commit();
+        }
     }
 
     @Override
@@ -46,14 +48,9 @@ public abstract class AbstractDao<T extends Model> implements Dao {
     }
 
     @Override
-    public <T> T save(T save) {
+    public T save(T save) {
         try{
             tm.beginWrite();
-            try {
-                Thread.sleep(20000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
             T savedObject = tm.getSm().merge(save);
             //tm.getSm().persist(savedObject);
             tm.commit();

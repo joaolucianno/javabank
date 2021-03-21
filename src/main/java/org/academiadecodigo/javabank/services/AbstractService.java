@@ -1,7 +1,10 @@
 package org.academiadecodigo.javabank.services;
 
+import org.academiadecodigo.javabank.model.Customer;
 import org.academiadecodigo.javabank.model.Model;
-import org.academiadecodigo.javabank.persistence.dao.Dao;
+import org.academiadecodigo.javabank.model.account.AbstractAccount;
+import org.academiadecodigo.javabank.model.account.Account;
+import org.academiadecodigo.javabank.persistence.dao.GenericDao;
 
 /**
  *
@@ -9,8 +12,8 @@ import org.academiadecodigo.javabank.persistence.dao.Dao;
  */
 public abstract class AbstractService<T extends Model> {
     //Fields
-    protected Dao accountDao;
-    protected Dao customerDao;
+    protected GenericDao<Account> accountDao;
+    protected GenericDao<Customer> customerDao;
 
 
     /**
@@ -18,7 +21,7 @@ public abstract class AbstractService<T extends Model> {
      * @param accountDao
      * @param customerDao
      */
-    public AbstractService(Dao accountDao, Dao customerDao) {
+    public AbstractService(GenericDao accountDao, GenericDao customerDao) {
         this.accountDao = accountDao;
         this.customerDao = customerDao;
     }

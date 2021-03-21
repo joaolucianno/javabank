@@ -5,12 +5,12 @@ import org.academiadecodigo.javabank.persistence.TransactionManager;
 
 import javax.persistence.EntityManager;
 
-public class JpaTrasactionManager implements TransactionManager {
+public class JpaTransactionManager implements TransactionManager {
     //Fields
     private SessionManager sm;
 
     //Constructor
-    public JpaTrasactionManager(SessionManager sm) {
+    public JpaTransactionManager(SessionManager sm) {
         this.sm = sm;
     }
 
@@ -34,7 +34,10 @@ public class JpaTrasactionManager implements TransactionManager {
 
     @Override
     public void rollback() {
-
+        if (sm.getCurrentSession().getTransaction().isActive()) {
+            sm.getCurrentSession().getTransaction().rollback();
+        }
+        sm.stopSession();
     }
 
     @Override

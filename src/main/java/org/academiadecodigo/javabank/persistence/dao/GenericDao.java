@@ -5,10 +5,10 @@ import org.academiadecodigo.javabank.model.Model;
 
 import java.util.List;
 
-public interface Dao{
-    <T> List<T> List();
-    <T> T get(Integer id);
-    <T> T save(T save);
+public interface GenericDao<T extends Model> {
+    List<T> List();
+    T get(Integer id);
+    T save(T save);
     void delete(Integer id);
 
 }

@@ -5,11 +5,16 @@ import org.academiadecodigo.javabank.controller.*;
 import org.academiadecodigo.javabank.controller.transaction.DepositController;
 import org.academiadecodigo.javabank.controller.transaction.WithdrawalController;
 import org.academiadecodigo.javabank.factories.AccountFactory;
-import org.academiadecodigo.javabank.services.AccountService;
-import org.academiadecodigo.javabank.services.AuthServiceImpl;
-import org.academiadecodigo.javabank.services.CustomerService;
+import org.academiadecodigo.javabank.persistence.SessionManager;
+import org.academiadecodigo.javabank.persistence.TransactionManager;
+import org.academiadecodigo.javabank.persistence.dao.jpa.JpaAccountDao;
+import org.academiadecodigo.javabank.persistence.dao.jpa.JpaCustomerDao;
+import org.academiadecodigo.javabank.persistence.jpa.JpaSessionManager;
+import org.academiadecodigo.javabank.persistence.jpa.JpaTransactionManager;
+import org.academiadecodigo.javabank.services.*;
 import org.academiadecodigo.javabank.view.*;
 
+import javax.persistence.EntityManagerFactory;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -54,7 +59,14 @@ public class Bootstrap {
      *
      * @return the login controller
      */
-    public Controller wireObjects() {
+    public Controller wireObjects(EntityManagerFactory emf) {
+
+        SessionManager sessionManager = new JpaSessionManager(emf);
+        TransactionManager transactionManager = new JpaTransactionManager(sessionManager);
+
+        setAuthService(new AuthServiceImpl());
+        setAccountService(new AccountServiceImp(new JpaAccountDao(transactionManager)));
+        setCustomerService(new CustomerServiceImp(new JpaCustomerDao(transactionManager)));
 
         // attach all input to standard i/o
         Prompt prompt = new Prompt(System.in, System.out);
