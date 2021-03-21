@@ -16,16 +16,16 @@ public abstract class AbstractMockService<T extends Model> implements CRUDServic
     protected Map<Integer, T> modelMap = new HashMap<>();
 
     /**
-     * Gets the next model id
      *
-     * @return the model id
+     * @return
      */
     private Integer getNextId() {
         return modelMap.isEmpty() ? 1 : Collections.max(modelMap.keySet()) + 1;
     }
 
     /**
-     * @see CRUDService#list()
+     *
+     * @return
      */
     @Override
     public List<T> list() {

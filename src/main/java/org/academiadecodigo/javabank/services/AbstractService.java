@@ -12,18 +12,17 @@ import org.academiadecodigo.javabank.persistence.dao.GenericDao;
  */
 public abstract class AbstractService<T extends Model> {
     //Fields
-    protected GenericDao<Account> accountDao;
-    protected GenericDao<Customer> customerDao;
+    protected GenericDao<T> dao;
 
 
     /**
      *
-     * @param accountDao
-     * @param customerDao
+     * @param
+     * @param
      */
-    public AbstractService(GenericDao accountDao, GenericDao customerDao) {
-        this.accountDao = accountDao;
-        this.customerDao = customerDao;
+    public AbstractService(GenericDao dao) {
+        this.dao = dao;
+
     }
 
 

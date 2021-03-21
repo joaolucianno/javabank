@@ -8,15 +8,14 @@ import javax.persistence.EntityManagerFactory;
 /**
  * A JPA {@link AccountService} implementation
  */
-public class AccountServiceImp implements AccountService {
-    //Fields
-    private GenericDao<Account> accountDao;
+public class AccountServiceImp extends AbstractService<Account> implements AccountService {
 
     /**
-     * @see AbstractService#(EntityManagerFactory, Class)
+     *
+     * @param dao
      */
-    public AccountServiceImp(GenericDao accountDao) {
-        this.accountDao = accountDao;
+    public AccountServiceImp(GenericDao dao) {
+        super(dao);
     }
 
     /**
@@ -25,72 +24,23 @@ public class AccountServiceImp implements AccountService {
      * @param amount the amount to deposit
      */
     public void deposit(Integer id, double amount) {
-        Account acc = accountDao.get(id);
+        Account acc = dao.get(id);
         acc.credit(amount);
-        accountDao.save(acc);
+        dao.save(acc);
 
-//        EntityManager em = emf.createEntityManager();
-//
-//        try {
-//
-//            em.getTransaction().begin();
-//
-//            Optional<Account> account = Optional.ofNullable(em.find(AbstractAccount.class, id));
-//
-//            if (!account.isPresent()) {
-//                em.getTransaction().rollback();
-//            }
-//
-//            account.orElseThrow(() -> new IllegalArgumentException("invalid account id")).credit(amount);
-//
-//            em.getTransaction().commit();
-//
-//        } catch (RollbackException ex) {
-//
-//            em.getTransaction().rollback();
-//
-//        } finally {
-//
-//            if (em != null) {
-//                em.close();
-//            }
-//        }
     }
 
     /**
-     * @see AccountService#withdraw(Integer, double)
+     *
+     * @param id     the id of the account
+     * @param amount the amount to withdraw
      */
     @Override
     public void withdraw(Integer id, double amount) {
-        Account acc = accountDao.get(id);
+        Account acc = dao.get(id);
         acc.debit(amount);
-        accountDao.save(acc);
-//        EntityManager em = emf.createEntityManager();
-//
-//        try {
-//
-//            em.getTransaction().begin();
-//
-//            Optional<Account> account = Optional.ofNullable(em.find(AbstractAccount.class, id));
-//
-//            if (!account.isPresent()) {
-//                em.getTransaction().rollback();
-//            }
-//
-//            account.orElseThrow(() -> new IllegalArgumentException("invalid account id")).debit(amount);
-//
-//            em.getTransaction().commit();
-//
-//        } catch (RollbackException ex) {
-//
-//            em.getTransaction().rollback();
-//
-//        } finally {
-//
-//            if (em != null) {
-//                em.close();
-//            }
-//        }
+        dao.save(acc);
+
     }
 
     /**
@@ -99,44 +49,10 @@ public class AccountServiceImp implements AccountService {
     @Override
     public void transfer(Integer srcId, Integer dstId, double amount) {
 
-//        EntityManager em = emf.createEntityManager();
-//
-//        try {
-//
-//            em.getTransaction().begin();
-//
-//            Optional<Account> srcAccount = Optional.ofNullable(em.find(AbstractAccount.class,srcId ));
-//            Optional<Account> dstAccount = Optional.ofNullable(em.find(AbstractAccount.class,dstId ));
-//
-//            if (!srcAccount.isPresent() || !dstAccount.isPresent()) {
-//                em.getTransaction().rollback();
-//            }
-//
-//            srcAccount.orElseThrow(() -> new IllegalArgumentException("invalid account id"));
-//            dstAccount.orElseThrow(() -> new IllegalArgumentException("invalid account id"));
-//
-//            // make sure transaction can be performed
-//            if (srcAccount.get().canDebit(amount) && dstAccount.get().canCredit(amount)) {
-//                srcAccount.get().debit(amount);
-//                dstAccount.get().credit(amount);
-//            }
-//
-//            em.getTransaction().commit();
-//
-//        } catch (RollbackException ex) {
-//
-//            em.getTransaction().rollback();
-//
-//        } finally {
-//
-//            if (em != null) {
-//                em.close();
-//            }
-//        }
     }
 
     @Override
     public Account add(Account account) {
-        return accountDao.save(account);
+        return dao.save(account);
     }
 }

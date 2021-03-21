@@ -3,32 +3,32 @@ package org.academiadecodigo.javabank.services;
 import org.academiadecodigo.javabank.model.Customer;
 import org.academiadecodigo.javabank.model.account.Account;
 import org.academiadecodigo.javabank.persistence.dao.GenericDao;
-
-import javax.persistence.EntityManagerFactory;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
 /**
- * A JPA {@link CustomerService} implementation
+ *
  */
-public class CustomerServiceImp implements CustomerService {
-    //Fields
-    private GenericDao<Customer> customerDao;
+public class CustomerServiceImp extends AbstractService<Customer> implements CustomerService {
 
     /**
-     * @see AbstractService#(EntityManagerFactory, Class)
+     *
+     * @param dao
      */
-    public CustomerServiceImp(GenericDao custumerDao) {
-        this.customerDao = custumerDao;
+    public CustomerServiceImp(GenericDao dao) {
+        super(dao);
+
     }
 
     /**
-     * @see CustomerService#getBalance(Integer)
+     *
+     * @param id the customer id
+     * @return
      */
     @Override
     public double getBalance(Integer id) {
-        return customerDao.get(id)
+        return dao.get(id)
                 .getAccounts()
                 .stream()
                 .mapToDouble(Account::getBalance)
@@ -37,46 +37,40 @@ public class CustomerServiceImp implements CustomerService {
     }
 
     /**
-     * @see CustomerService#listCustomerAccountIds(Integer)
+     *
+     * @param id the customer id
+     * @return
      */
     @Override
     public Set<Integer> listCustomerAccountIds(Integer id) {
-        Customer customer = Optional.ofNullable(customerDao.get(id))
+        Customer customer = Optional.ofNullable(dao.get(id))
                 .orElseThrow(() -> new IllegalArgumentException("Customer does not exist"));
 
         return customer.getAccounts().stream()
                     .map(Account::getId)
                     .collect(Collectors.toSet());
 
-
-
-//        EntityManager em = emf.createEntityManager();
-//
-//        try {
-//
-//            Customer customer = Optional.ofNullable(em.find(Customer.class, id))
-//                    .orElseThrow(() -> new IllegalArgumentException("Customer does not exist"));
-//
-//            return customer.getAccounts().stream()
-//                    .map(Model::getId)
-//                    .collect(Collectors.toSet());
-//
-//        } finally {
-//            if (em != null) {
-//                em.close();
-//            }
-//        }
-        //return null;
     }
 
+    /**
+     *
+     * @param id
+     * @return
+     */
     @Override
     public Customer getCustomer(Integer id) {
-        //Customer customer = Optional.ofNullable(customerDao.get(id));
-        return customerDao.get(id);
+        return dao.get(id);
+
     }
 
+    /**
+     *
+     * @param customer
+     * @return
+     */
     @Override
     public Customer add(Customer customer) {
-        return customerDao.save(customer);
+        return dao.save(customer);
+
     }
 }

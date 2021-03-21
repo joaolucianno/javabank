@@ -26,7 +26,17 @@ public interface CustomerService {
      */
     Set<Integer> listCustomerAccountIds(Integer id);
 
+    /**
+     *
+     * @param id
+     * @return
+     */
     Customer getCustomer(Integer id);
 
+    /**
+     *
+     * @param account
+     * @return
+     */
     Customer add(Customer account);
 }
