@@ -7,6 +7,7 @@ import org.academiadecodigo.javabank.persistence.dao.GenericDao;
 import javax.persistence.RollbackException;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 import java.util.List;
 
 public abstract class AbstractDao<T extends Model> implements GenericDao<T> {
@@ -22,7 +23,7 @@ public abstract class AbstractDao<T extends Model> implements GenericDao<T> {
 
     //Custom Methods
     @Override
-    public List<T> List() {
+    public List<T> list() {
         try{
             CriteriaBuilder builder = tm.getSm().getCriteriaBuilder();
             CriteriaQuery criteriaQuery = builder.createQuery(modelType);

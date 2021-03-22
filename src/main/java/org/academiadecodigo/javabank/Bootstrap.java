@@ -93,8 +93,8 @@ public class Bootstrap {
 
         // wire balance controller and view
         BalanceController balanceController = new BalanceController();
-        BalanceView balanceView = new BalanceView();
-        //BalanceGFXView balanceView = new BalanceGFXView();
+        //BalanceView balanceView = new BalanceView();
+        BalanceGFXView balanceView = new BalanceGFXView();
         balanceView.setBalanceController(balanceController);
         balanceController.setView(balanceView);
         balanceController.setCustomerService(customerService);
