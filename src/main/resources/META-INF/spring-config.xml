@@ -47,8 +47,10 @@
         <property name="jpaProperties">
             <map>
                 <entry key="hibernate.dialect" value="org.hibernate.dialect.MySQL8Dialect"/>
-                <entry key="hibernate.show_sql" value="true" />
+                <entry key="hibernate.show_sql" value="false" />
                 <!-- WARNING: Will re-create the database schema, causing data loss -->
+                <entry key="hibernate.hbm2ddl.import_files" value="db/test-data.sql"/>
+                <entry key="hibernate.hbm2ddl.import_files_sql_extractor" value="org.hibernate.tool.hbm2ddl.MultipleLinesSqlCommandExtractor"/>
                 <entry key="hibernate.hbm2ddl.auto" value="create"/>
             </map>
         </property>
@@ -60,9 +62,9 @@
         <property name="controllerMap">
             <map>
                 <entry key="1" value-ref="balanceController"/>
-                <entry key="2" value-ref="newAccountController"/>
-                <entry key="3" value-ref="depositController"/>
-                <entry key="4" value-ref="withDrawalController"/>
+                <entry key="2" value-ref="depositController"/>
+                <entry key="3" value-ref="withDrawalController"/>
+                <entry key="4" value-ref="newAccountController"/>
                 <entry key="5" value-ref="recipientsController"/>
             </map>
         </property>
@@ -115,43 +117,16 @@
     </bean>
 
     <bean id="checkingAccount" class="org.academiadecodigo.javabank.model.account.CheckingAccount">
-        <!--property name="id" value=""/>
-        <property name="version" value=""/>
-        <property name="creationTime" ref=""/>
-        <property name="updateTime" ref=""/-->
-
         <property name="customer" ref="customer"/>
     </bean>
 
     <bean id="savingAccount" class="org.academiadecodigo.javabank.model.account.SavingsAccount">
-        <!--property name="id" value=""/>
-        <property name="version" value=""/>
-        <property name="creationTime" ref=""/>
-        <property name="updateTime" ref=""/-->
         <property name="customer" ref="customer"/>
     </bean>
 
-    <bean id="customer" class="org.academiadecodigo.javabank.model.Customer">
-        <!--property name="id" value="">
-        <property name="version" value=""/>
-        <property name="creationTime" ref=""/>
-        <property name="updateTime" ref=""/>
-        <property name="firstName" value=""/>
-        <property name="lastName" value=""/>
-        <property name="email" value=""/>
-        <property name="phone" value=""/-->
-    </bean>
+    <bean id="customer" class="org.academiadecodigo.javabank.model.Customer"></bean>
 
     <bean id="recipient" class="org.academiadecodigo.javabank.model.Recipient">
-        <!--property name="id" value=""/>
-        <property name="version" value=""/>
-        <property name="creationTime" ref=""/>
-        <property name="updateTime" ref=""/>
-        <property name="name" value=""/>
-        <property name="email" value=""/>
-        <property name="phone" value=""/>
-        <property name="accountNumber" value=""/>
-        <property name="description" value=""/-->
         <property name="customer" ref="customer"/>
     </bean>
 
