@@ -4,6 +4,7 @@ import org.academiadecodigo.javabank.Config;
 
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.persistence.PersistenceUnit;
 import java.sql.SQLException;
 
 public class JpaBootstrap {
