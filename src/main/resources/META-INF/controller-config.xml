@@ -7,7 +7,7 @@
         <property name="authService" ref="authServiceImpl"/>
         <property name="view" ref="mainView"/>
         <property name="controllerMap">
-            <map>
+            <map> <!-- #{T(org.academiadecodigo.javabank.view.UserOptions).GET_BALANCE.option -->
                 <entry key="1" value-ref="balanceController"/>
                 <entry key="2" value-ref="depositController"/>
                 <entry key="3" value-ref="withDrawalController"/>
