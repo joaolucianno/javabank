@@ -3,4 +3,64 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
+    <bean id="mainController" class="org.academiadecodigo.javabank.controller.MainController">
+        <property name="authService" ref="authServiceImpl"/>
+        <property name="view" ref="mainView"/>
+        <property name="controllerMap">
+            <map>
+                <entry key="1" value-ref="balanceController"/>
+                <entry key="2" value-ref="depositController"/>
+                <entry key="3" value-ref="withDrawalController"/>
+                <entry key="4" value-ref="newAccountController"/>
+                <entry key="5" value-ref="recipientsController"/>
+            </map>
+        </property>
+
+    </bean>
+
+    <bean id="loginController" class="org.academiadecodigo.javabank.controller.LoginController">
+        <property name="authService" ref="authServiceImpl"/>
+        <property name="view" ref="loginView"/>
+        <property name="nextController" ref="mainController"/>
+    </bean>
+
+
+
+    <bean id="balanceController" class="org.academiadecodigo.javabank.controller.BalanceController">
+        <property name="authService" ref="authServiceImpl"/>
+        <property name="view" ref="balanceView"/>
+        <property name="customerService" ref="customerServiceImpl"/>
+    </bean>
+
+    <bean id="newAccountController" class="org.academiadecodigo.javabank.controller.NewAccountController">
+        <property name="authService" ref="authServiceImpl"/>
+        <property name="view" ref="newAccountView"/>
+        <property name="accountFactory" ref="accountFactory"/>
+        <property name="accountService" ref="accountServiceImpl"/>
+    </bean>
+
+    <bean id="recipientsController" class="org.academiadecodigo.javabank.controller.RecipientsController">
+        <property name="authService" ref="authServiceImpl"/>
+        <property name="view" ref="recipientsView"/>
+        <property name="customerService" ref="customerServiceImpl"/>
+    </bean>
+
+    <bean id="accountFactory" class="org.academiadecodigo.javabank.factories.AccountFactory">
+
+    </bean>
+
+    <bean id="depositController" class="org.academiadecodigo.javabank.controller.transaction.DepositController">
+        <property name="authService" ref="authServiceImpl"/>
+        <property name="view" ref="accountTransactionViewDeposit"/>
+        <property name="accountService" ref="accountServiceImpl"/>
+        <property name="customerService" ref="customerServiceImpl"/>
+    </bean>
+
+    <bean id="withDrawalController" class="org.academiadecodigo.javabank.controller.transaction.WithdrawalController">
+        <property name="authService" ref="authServiceImpl"/>
+        <property name="view" ref="accountTransactionViewWithDraw"/>
+        <property name="accountService" ref="accountServiceImpl"/>
+        <property name="customerService" ref="customerServiceImpl"/>
+    </bean>
+
 </beans>
