@@ -9,7 +9,6 @@ import org.springframework.stereotype.Repository;
  * A JPA {@link AccountDao} implementation
  */
 @Repository
-@Profile("prod")
 public class JpaAccountDao extends GenericJpaDao<Account> implements AccountDao {
 
     /**

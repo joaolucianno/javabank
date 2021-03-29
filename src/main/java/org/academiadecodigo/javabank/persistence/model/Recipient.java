@@ -1,5 +1,7 @@
 package org.academiadecodigo.javabank.persistence.model;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;

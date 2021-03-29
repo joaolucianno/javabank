@@ -2,13 +2,13 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:mvc="http://www.springframework.org/schema/mvc"
-       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
        http://www.springframework.org/schema/beans/spring-beans.xsd
        http://www.springframework.org/schema/mvc
        http://www.springframework.org/schema/mvc/spring-mvc.xsd
        http://www.springframework.org/schema/context
-       http://www.springframework.org/schema/context/spring-context.xsd">
+       http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
 
     <!-- Use spring servlet for all requests, including static resources -->
     <mvc:default-servlet-handler/>
@@ -17,11 +17,61 @@
     <mvc:annotation-driven/>
     <context:component-scan base-package="org.academiadecodigo.javabank"/>
 
+    <tx:annotation-driven transaction-manager="transactionManager"/>
 
-    <!-- configure the view resolver -->
-    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-        <property name="prefix" value="/WEB-INF/views/"/>
-        <property name="suffix" value=".jsp"/>
+     <!--Enable support for JPA annotations
+    <bean class="org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor"/>-->
+
+    <!-- c3p0 database connection pool management -->
+    <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
+
+        <property name="driverClass" value="com.mysql.cj.jdbc.Driver"/>
+        <property name="jdbcUrl" value="jdbc:mysql://localhost:3306/javabank?useSSL=false"/>
+        <property name="user" value="root"/>
+        <property name="password" value=""/>
+
+        <!-- c3p0 database connection pool management properties -->
+        <property name="minPoolSize" value="1"/>
+        <property name="maxPoolSize" value="10"/>
+        <property name="acquireIncrement" value="1"/>
+        <property name="maxStatements" value="0"/>
+
+        <!-- destroy idle pool after 300ms -->
+        <property name="idleConnectionTestPeriod" value="300"/>
+
+        <!-- destroy db connection if it fails to login after 7200ms -->
+        <property name="loginTimeout" value="7200"/>
+
+    </bean>
+
+    <!--  -->
+    <bean id="emFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+
+        <property name="dataSource" ref="dataSource"/>
+        <property name="packagesToScan" value="org.academiadecodigo.javabank.persistence.model"/>
+        <property name="jpaVendorAdapter">
+            <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter"/>
+        </property>
+        <property name="jpaProperties">
+            <map>
+                <entry key="hibernate.show_sql" value="false" />
+                <entry key="hibernate.dialect" value="org.hibernate.dialect.MySQL8Dialect"/>
+
+                <!-- Insert test data if dev.schema.auto property set to create -->
+                <entry key="hibernate.hbm2ddl.import_files" value="db/test-data.sql"/>
+                <entry key="hibernate.hbm2ddl.import_files_sql_extractor"
+                       value="org.hibernate.tool.hbm2ddl.MultipleLinesSqlCommandExtractor"/>
+
+                <!-- Validate database schema, data loss can occur if set to create or update -->
+                <entry key="hibernate.hbm2ddl.auto" value="update"/>
+            </map>
+        </property>
+    </bean>
+
+
+
+    <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+        <property name="entityManagerFactory" ref="emFactory"/>
     </bean>
 
     <!-- NEW BEAN -->
@@ -44,7 +94,7 @@
 
     <!-- Thymeleaf template resolver -->
     <bean id="templateResolver" class="org.thymeleaf.spring4.templateresolver.SpringResourceTemplateResolver">
-        <property name="prefix" value="/WEB-INF/views"/>
+        <property name="prefix" value="/WEB-INF/views/"/>
         <property name="suffix" value=".html"/>
         <property name="templateMode" value="HTML"/>
         <property name="cacheable" value="false"/>
@@ -54,14 +104,13 @@
 
     <!-- Copy Javabank -->
 
-    <bean class="org.springframework.context.support.PropertySourcesPlaceholderConfigurer">
-        <property name="locations" value="classpath:javabank.properties"/>
-    </bean>
 
-    <import resource="persistence.xml"/>
+
+    <!--<import resource="service.xml"/>-->
+    <!--<import resource="persistence.xml"/>
     <import resource="persistence/persistence-dev.xml"/>
     <import resource="persistence/persistence-prod.xml"/>
-    <import resource="persistence/persistence-test.xml"/>
+    <import resource="persistence/persistence-test.xml"/>-->
 
 
 

@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
  * An {@link AuthService} implementation
  */
 @Service
-@Profile("prod")
 public class AuthServiceImpl implements AuthService {
 
     private Integer accessingCustomerId;

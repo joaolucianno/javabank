@@ -17,7 +17,6 @@ import java.util.stream.Collectors;
  * An {@link CustomerService} implementation
  */
 @Service
-@Profile("prod")
 public class CustomerServiceImpl implements CustomerService {
 
     private CustomerDao customerDao;
@@ -80,4 +79,10 @@ public class CustomerServiceImpl implements CustomerService {
 
         return new ArrayList<>(customer.getRecipients());
     }
+
+    @Override
+    public List<Customer> customerList(){
+        return customerDao.findAll();
+    }
+
 }

@@ -9,7 +9,6 @@ import org.springframework.stereotype.Repository;
  * A JPA {@link RecipientDao} implementation
  */
 @Repository
-@Profile("prod")
 public class JpaRecipientDao extends GenericJpaDao<Recipient> implements RecipientDao {
 
     /**

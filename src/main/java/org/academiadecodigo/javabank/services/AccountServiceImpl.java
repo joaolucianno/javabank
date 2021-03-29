@@ -13,7 +13,6 @@ import java.util.Optional;
  * An {@link AccountService} implementation
  */
 @Service
-@Profile("prod")
 public class AccountServiceImpl implements AccountService {
 
     private AccountDao accountDao;
