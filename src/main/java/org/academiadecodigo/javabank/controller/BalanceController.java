@@ -6,12 +6,13 @@ import org.academiadecodigo.javabank.view.BalanceView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
  * The {@link BalanceView} controller
  */
 @Controller
-@Profile("prod")
+@RequestMapping("/balance")
 public class BalanceController extends AbstractController {
 
     private CustomerService customerService;

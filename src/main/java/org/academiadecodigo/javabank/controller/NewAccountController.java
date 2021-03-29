@@ -7,12 +7,13 @@ import org.academiadecodigo.javabank.services.AccountService;
 import org.academiadecodigo.javabank.view.NewAccountView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Profile;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
  * The {@link NewAccountView} controller
  */
 @org.springframework.stereotype.Controller
-@Profile("prod")
+@RequestMapping("/newaccount")
 public class NewAccountController extends AbstractController {
 
     private Integer newAccountId;

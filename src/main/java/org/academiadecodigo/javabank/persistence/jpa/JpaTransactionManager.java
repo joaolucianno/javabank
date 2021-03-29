@@ -8,8 +8,6 @@ import org.springframework.stereotype.Repository;
 /**
  * A JPA {@link TransactionManager} implementation
  */
-@Repository
-@Profile("prod")
 public class JpaTransactionManager implements TransactionManager {
 
     private JpaSessionManager sm;

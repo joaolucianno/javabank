@@ -2,13 +2,14 @@ package org.academiadecodigo.javabank.controller.transaction;
 
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
  * A controller used for deposit transactions
  * @see AbstractAccountTransactionController
  */
 @Controller
-@Profile("prod")
+@RequestMapping("/deposit")
 public class DepositController extends AbstractAccountTransactionController {
 
     /**

@@ -3,12 +3,13 @@ package org.academiadecodigo.javabank.controller;
 import org.academiadecodigo.javabank.view.LoginView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Profile;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
  * The {@link LoginView} controller
  */
 @org.springframework.stereotype.Controller
-@Profile("prod")
+@RequestMapping("/login")
 public class LoginController extends AbstractController {
 
     private Controller nextController;

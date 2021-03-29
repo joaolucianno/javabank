@@ -12,8 +12,6 @@ import javax.persistence.PersistenceUnit;
 /**
  * A JPA {@link SessionManager} implementation
  */
-@Repository
-@Profile("prod")
 public class JpaSessionManager implements SessionManager<EntityManager> {
 
     private EntityManagerFactory emf;
