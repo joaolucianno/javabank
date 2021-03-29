@@ -58,6 +58,7 @@
         <property name="locations" value="classpath:javabank.properties"/>
     </bean>
 
+    <import resource="persistence.xml"/>
     <import resource="persistence/persistence-dev.xml"/>
     <import resource="persistence/persistence-prod.xml"/>
     <import resource="persistence/persistence-test.xml"/>
