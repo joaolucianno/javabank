@@ -3,10 +3,15 @@ package org.academiadecodigo.javabank.controller;
 import org.academiadecodigo.javabank.persistence.model.Customer;
 import org.academiadecodigo.javabank.services.CustomerService;
 import org.academiadecodigo.javabank.view.BalanceView;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Profile;
+import org.springframework.stereotype.Controller;
 
 /**
  * The {@link BalanceView} controller
  */
+@Controller
+@Profile("prod")
 public class BalanceController extends AbstractController {
 
     private CustomerService customerService;
@@ -16,6 +21,7 @@ public class BalanceController extends AbstractController {
      *
      * @param customerService the customer service to set
      */
+    @Autowired
     public void setCustomerService(CustomerService customerService) {
         this.customerService = customerService;
     }

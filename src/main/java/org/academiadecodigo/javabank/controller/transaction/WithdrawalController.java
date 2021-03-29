@@ -1,9 +1,14 @@
 package org.academiadecodigo.javabank.controller.transaction;
 
+import org.springframework.context.annotation.Profile;
+import org.springframework.stereotype.Controller;
+
 /**
  * A controller used for withdraw transactions
  * @see AbstractAccountTransactionController
  */
+@Controller
+@Profile("prod")
 public class WithdrawalController extends AbstractAccountTransactionController {
 
     /**

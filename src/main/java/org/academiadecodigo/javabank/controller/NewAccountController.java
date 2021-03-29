@@ -5,10 +5,14 @@ import org.academiadecodigo.javabank.persistence.model.account.Account;
 import org.academiadecodigo.javabank.persistence.model.account.AccountType;
 import org.academiadecodigo.javabank.services.AccountService;
 import org.academiadecodigo.javabank.view.NewAccountView;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Profile;
 
 /**
  * The {@link NewAccountView} controller
  */
+@org.springframework.stereotype.Controller
+@Profile("prod")
 public class NewAccountController extends AbstractController {
 
     private Integer newAccountId;
@@ -29,6 +33,7 @@ public class NewAccountController extends AbstractController {
      *
      * @param accountFactory the account factory to set
      */
+    @Autowired
     public void setAccountFactory(AccountFactory accountFactory) {
         this.accountFactory = accountFactory;
     }
@@ -38,6 +43,7 @@ public class NewAccountController extends AbstractController {
      *
      * @param accountService the account service to set
      */
+    @Autowired
     public void setAccountService(AccountService accountService) {
         this.accountService = accountService;
     }

@@ -2,12 +2,16 @@ package org.academiadecodigo.javabank.persistence.dao.jpa;
 
 import org.academiadecodigo.javabank.persistence.model.Customer;
 import org.academiadecodigo.javabank.persistence.dao.CustomerDao;
+import org.springframework.context.annotation.Profile;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 /**
  * A JPA {@link CustomerDao} implementation
  */
+@Repository
+@Profile("prod")
 public class JpaCustomerDao extends GenericJpaDao<Customer> implements CustomerDao {
 
     /**

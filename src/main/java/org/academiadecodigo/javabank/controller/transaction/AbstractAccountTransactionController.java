@@ -3,6 +3,7 @@ package org.academiadecodigo.javabank.controller.transaction;
 import org.academiadecodigo.javabank.controller.AbstractController;
 import org.academiadecodigo.javabank.services.AccountService;
 import org.academiadecodigo.javabank.services.CustomerService;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.Set;
 
@@ -21,6 +22,7 @@ public abstract class AbstractAccountTransactionController extends AbstractContr
      *
      * @param accountService the account service to set
      */
+    @Autowired
     public void setAccountService(AccountService accountService) {
         this.accountService = accountService;
     }
@@ -30,6 +32,7 @@ public abstract class AbstractAccountTransactionController extends AbstractContr
      *
      * @param customerService the customer service to set
      */
+    @Autowired
     public void setCustomerService(CustomerService customerService) {
         this.customerService = customerService;
     }

@@ -1,10 +1,15 @@
 package org.academiadecodigo.javabank.persistence.jpa;
 
 import org.academiadecodigo.javabank.persistence.TransactionManager;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Profile;
+import org.springframework.stereotype.Repository;
 
 /**
  * A JPA {@link TransactionManager} implementation
  */
+@Repository
+@Profile("prod")
 public class JpaTransactionManager implements TransactionManager {
 
     private JpaSessionManager sm;
@@ -14,6 +19,7 @@ public class JpaTransactionManager implements TransactionManager {
      *
      * @param sm the session manager to set
      */
+    @Autowired
     public void setSm(JpaSessionManager sm) {
         this.sm = sm;
     }

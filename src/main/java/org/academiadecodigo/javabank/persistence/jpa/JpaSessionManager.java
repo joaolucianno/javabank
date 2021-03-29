@@ -1,6 +1,9 @@
 package org.academiadecodigo.javabank.persistence.jpa;
 
 import org.academiadecodigo.javabank.persistence.SessionManager;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Profile;
+import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -9,6 +12,8 @@ import javax.persistence.PersistenceUnit;
 /**
  * A JPA {@link SessionManager} implementation
  */
+@Repository
+@Profile("prod")
 public class JpaSessionManager implements SessionManager<EntityManager> {
 
     private EntityManagerFactory emf;
@@ -20,6 +25,7 @@ public class JpaSessionManager implements SessionManager<EntityManager> {
      * @param emf the entity manager factory to set
      */
     @PersistenceUnit
+    @Autowired
     public void setEmf(EntityManagerFactory emf) {
         this.emf = emf;
     }

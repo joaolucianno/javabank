@@ -4,12 +4,16 @@ import org.academiadecodigo.javabank.persistence.model.Customer;
 import org.academiadecodigo.javabank.view.MainView;
 import org.academiadecodigo.javabank.view.Messages;
 import org.academiadecodigo.javabank.view.UserOptions;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Profile;
 
 import java.util.Map;
 
 /**
  * The {@link MainView} controller
  */
+@org.springframework.stereotype.Controller
+@Profile("prod")
 public class MainController extends AbstractController {
 
     private Map<Integer, Controller> controllerMap;
@@ -19,6 +23,7 @@ public class MainController extends AbstractController {
      *
      * @param controllerMap the controller map to set
      */
+    @Autowired
     public void setControllerMap(Map<Integer, Controller> controllerMap) {
         this.controllerMap = controllerMap;
     }

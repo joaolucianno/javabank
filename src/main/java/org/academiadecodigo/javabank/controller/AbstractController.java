@@ -2,6 +2,7 @@ package org.academiadecodigo.javabank.controller;
 
 import org.academiadecodigo.javabank.services.AuthService;
 import org.academiadecodigo.javabank.view.View;
+import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * A generic controller to be used as a base for concrete controller implementations
@@ -18,6 +19,7 @@ public abstract class AbstractController implements Controller {
      *
      * @param authService the authentication service to set
      */
+    @Autowired
     public void setAuthService(AuthService authService) {
         this.authService = authService;
     }
@@ -27,6 +29,7 @@ public abstract class AbstractController implements Controller {
      *
      * @param view the view to be set
      */
+    @Autowired
     public void setView(View view) {
         this.view = view;
     }

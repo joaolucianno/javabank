@@ -1,10 +1,14 @@
 package org.academiadecodigo.javabank.controller;
 
 import org.academiadecodigo.javabank.view.LoginView;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Profile;
 
 /**
  * The {@link LoginView} controller
  */
+@org.springframework.stereotype.Controller
+@Profile("prod")
 public class LoginController extends AbstractController {
 
     private Controller nextController;
@@ -15,6 +19,7 @@ public class LoginController extends AbstractController {
      *
      * @param nextController the next controller to set
      */
+    @Autowired
     public void setNextController(Controller nextController) {
         this.nextController = nextController;
     }
