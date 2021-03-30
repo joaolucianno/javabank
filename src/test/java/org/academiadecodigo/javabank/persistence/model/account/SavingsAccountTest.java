@@ -1,6 +1,5 @@
 package org.academiadecodigo.javabank.persistence.model.account;
 
-import org.academiadecodigo.javabank.model.account.SavingsAccount;
 import org.junit.Before;
 import org.junit.Test;
 
