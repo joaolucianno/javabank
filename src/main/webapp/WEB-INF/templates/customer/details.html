@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+
+
+    <title>JavaBank</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" modelType="text/css"/>
+    <script modelType="application/javascript" src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+    <script modelType="application/javascript" async src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+
+
+    <script>
+
+        // attach click event handler to elements with account-deposit-modal class
+        $(document).on("click", ".account-deposit-modal", function () {
+
+            // fetch the value of the id attribute from the html element
+            var accountId = $(this).data('id');
+
+            // set the value on the form hidden id field
+            $("#deposit-account-id").val(accountId);
+        });
+
+        // attach click event handler to elements with account-withdraw-modal class
+        $(document).on("click", ".account-withdraw-modal", function () {
+
+            // fetch the value of the id attribute from the html element
+            var accountId = $(this).data('id');
+
+            // set the value on the form hidden id field
+            $("#withdraw-account-id").val(accountId);
+        });
+
+    </script>
+
+</head>
+<body>
+
+<div class="container">
+
+    <div>
+
+        <br>
+
+
+
+
+
+    </div>
+
+    <div>
+
+        <div class="row">
+            <div class="col-sm-8">
+                <h2 th:text="'Customer ID: ' + ${customer.id}"></h2>
+                <form class="form-horizontal">
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">First Name:</label>
+                        <div class="col-sm-10">
+                            <p class="form-control-static" th:text="${customer.firstName}">Rui</p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">Last Name:</label>
+                        <div class="col-sm-10">
+                            <p class="form-control-static" th:text="${customer.lastName}">Ferrão</p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">Email:</label>
+                        <div class="col-sm-10">
+                            <p class="form-control-static" th:text="${customer.email}">mail@gmail.com</p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">Phone:</label>
+                        <div class="col-sm-10">
+                            <p class="form-control-static" th:text="${customer.phone}">777888</p>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+    </div>
+
+    <div>
+
+        <div class="row">
+            <div class="col-sm-8">
+                <h3>Accounts</h3>
+                <p>
+                    <a class="btn btn-success" type="button" data-toggle="modal"
+                       data-target="#add-account-modal">Add</a>
+                    <a class="btn btn-warning" type="button"
+                       data-target="#account-transfer-modal"
+                       data-toggle="modal">Transfer</a>
+                </p>
+
+                <div>
+                    <table class="table table-striped table-bordered">
+                        <tr>
+                            <th>#</th>
+                            <th>Balance</th>
+                            <th>Type</th>
+                            <th>Deposit</th>
+                            <th>Withdraw</th>
+                            <th>Close</th>
+                        </tr>
+                        <tr th:each="account : ${accounts}">
+                            <td th:text="${account.id}"></td>
+                            <td th:text="${account.balance}"></td>
+                            <td th:text="${account.accountType}"></td>
+
+                            <td><a id="deposit" class="btn btn-success account-deposit-modal" type="button"
+                                   data-toggle="modal"
+                                   data-target="#deposit-modal" data-id="1">Deposit</a>
+
+                            <td><a id="withdraw" class="btn btn-warning account-withdraw-modal" type="button"
+                                   data-target="#withdraw-modal"
+                                   data-toggle="modal" data-id="1">Withdraw</a>
+
+                            <td><a class="btn btn-danger" type="button"
+                                   href="/customer/1/account/1/close">Close</a>
+
+                        </tr>
+                        <!--<tr>
+                            <th>Total:</th>
+                            <td th:text="${getBalance}"></td>
+                            <td colspan="4" style="visibility: hidden"></td>
+                        </tr>-->
+                    </table>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+    <div class="row">
+        <div class="col-sm-8">
+            <a class="btn btn-primary" href="/customer/1/recipient">Recipients</a>
+            <a class="btn btn-info" th:href="@{/customer/list}">Customer List</a>
+        </div>
+    </div>
+
+</div>
+
+<!--<div class="container">
+
+    &lt;!&ndash; Modal &ndash;&gt;
+    <div class="modal fade" id="add-account-modal" role="dialog">
+        <div class="modal-dialog">
+
+            &lt;!&ndash; Modal content &ndash;&gt;
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Add Account</h4>
+                </div>
+                <div class="modal-body">
+
+                    <form class="form-horizontal" action="/customer/1/account"
+                          method="post">
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Initial Amount:</label>
+                            <div class="col-sm-10">
+                                <input type="text" pattern="^\$?0*[1-9]\d*(\.\d{0,2})?|\d*(\.0[1-9])|\d*(\.[1-9]\d?)?$"
+                                       title="Not a valid amount" class="form-control" id="balance" name="balance" value=""/>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label"> Type </label>
+                            <div class="col-sm-10">
+                                <select class="form-control" id="type" name="type">
+
+                                    <option value="CHECKING">CHECKING</option>
+
+                                    <option value="SAVINGS">SAVINGS</option>
+
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <button type="submit" class="btn btn-primary">Add</button>
+                                <button data-dismiss="modal" type="button" class="btn btn-danger">Cancel</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container">
+
+    <div class="modal fade" id="account-transfer-modal" role="dialog">
+
+        <div class="modal-dialog">
+
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <h4 class="modal-title">Transfer</h4>
+                </div>
+
+                <div class="modal-body">
+
+                    <form class="form-horizontal"
+                          action="/customer/1/transfer"
+                          method="post">
+
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">Origin Account</label>
+                            <div class="col-sm-8">
+                                <select class="form-control" id="srcId" name="srcId">
+                                    <option value="1">#1 CHECKING  (Balance: 100.0)</option>
+                                    <option value="2">#2 SAVINGS  (Balance: 50.5)</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">Destination Account</label>
+                            <div class="col-sm-8">
+                                <select class="form-control" id="dstId" name="dstId">
+                                    <option value="1">#1 CHECKING  (Balance: 100.0)</option>
+                                    <option value="2">#2 SAVINGS  (Balance: 50.5)</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">Amount </label>
+                            <div class="col-sm-8">
+                                <input type="text" pattern="^\$?0*[1-9]\d*(\.\d{0,2})?|\d*(\.0[1-9])|\d*(\.[1-9]\d?)?$"
+                                       title="Not a valid amount" class="form-control" id="amount" name="amount" value=""/>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <button type="submit" class="btn btn-primary">Transfer</button>
+                                <button data-dismiss="modal" type="button" class="btn btn-danger">Cancel</button>
+                            </div>
+                        </div>
+
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container">
+
+    <div class="modal fade" id="deposit-modal" role="dialog">
+
+        <div class="modal-dialog">
+
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <h4 class="modal-title">Deposit</h4>
+                </div>
+
+                <div class="modal-body">
+
+                    <form class="form-horizontal"
+                          action="/customer/1/deposit"
+                          method="post">
+
+                        <input id="deposit-account-id" type="hidden" class="form-control" name="id" value="1"/>
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Amount:</label>
+                            <div class="col-sm-10">
+                                <input type="text" pattern="^\$?0*[1-9]\d*(\.\d{0,2})?|\d*(\.0[1-9])|\d*(\.[1-9]\d?)?$"
+                                       title="Not a valid amount" class="form-control" id="amount" name="amount" value=""/>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <button type="submit" class="btn btn-primary">Deposit</button>
+                                <button data-dismiss="modal" type="button" class="btn btn-danger">Cancel</button>
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container">
+
+    <div class="modal fade" id="withdraw-modal" role="dialog">
+
+        <div class="modal-dialog">
+
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <h4 class="modal-title">Deposit</h4>
+                </div>
+
+                <div class="modal-body">
+
+                    <form class="form-horizontal"
+                          action="/customer/1/withdraw"
+                          method="post">
+
+                        <input id="withdraw-account-id" type="hidden" class="form-control" name="id" value="1"/>
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Amount:</label>
+                            <div class="col-sm-10">
+                                <input type="text" pattern="^\$?0*[1-9]\d*(\.\d{0,2})?|\d*(\.0[1-9])|\d*(\.[1-9]\d?)?$"
+                                       title="Not a valid amount" class="form-control" id="amount" name="amount" value=""/>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <button type="submit" class="btn btn-primary">Withdraw</button>
+                                <button data-dismiss="modal" type="button" class="btn btn-danger">Cancel</button>
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>-->
+
+</body>
+</html>

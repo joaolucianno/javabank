@@ -15,6 +15,12 @@
     <dependencies>
 
         <dependency>
+            <groupId>org.hibernate.validator</groupId>
+            <artifactId>hibernate-validator</artifactId>
+            <version>6.0.2.Final</version>
+        </dependency>
+
+        <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <version>4.12</version>
@@ -139,6 +145,8 @@
                 <configuration>
                     <url>http://localhost:8080/manager/text</url>
                     <server>tomcat</server>
+                    <username>maven</username>
+                    <password>maven</password>
                     <path>/javabank1</path>
                 </configuration>
             </plugin>
