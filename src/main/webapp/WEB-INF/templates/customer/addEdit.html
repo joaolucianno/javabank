@@ -27,13 +27,10 @@
         <div class="col-sm-8">
             <form th:object="${customerDTO}"
                   class="form-horizontal"
-                  th:action="@{/customer/submitCustomer/{id}(id=${customerDTO.id})}"
+                  th:action="@{/customer/submitCustomer}"
                   method="post">
 
-                <!-- since we are using same form for add and update,
-                  we need to bind id input field to customer object
-                  to avoid duplicating records on update -->
-                <input type="hidden" id="id" name="id" value=""/>
+                <input type="hidden" id="id" name="id" th:field="*{id}"/>
 
                 <div class="form-group">
                     <label class="col-sm-2 control-label">First Name:</label>

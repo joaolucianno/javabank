@@ -186,6 +186,7 @@ public class Customer extends AbstractModel {
         // printing recipients with lazy loading
         // and no session will cause issues
         return "Customer{" +
+                "firstName='" + getId() + '\'' +
                 "firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", email='" + email + '\'' +

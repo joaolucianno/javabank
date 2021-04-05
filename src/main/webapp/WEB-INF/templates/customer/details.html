@@ -124,14 +124,14 @@
                                    data-toggle="modal" data-id="1">Withdraw</a>
 
                             <td><a class="btn btn-danger" type="button"
-                                   href="/customer/1/account/1/close">Close</a>
+                                   th:href="@{'/customer/' + ${customer.id} + '/deleteAccount/' + ${account.id}}">Close</a>
 
                         </tr>
-                        <!--<tr>
+                        <tr>
                             <th>Total:</th>
                             <td th:text="${getBalance}"></td>
                             <td colspan="4" style="visibility: hidden"></td>
-                        </tr>-->
+                        </tr>
                     </table>
                 </div>
             </div>
@@ -149,13 +149,13 @@
 
 </div>
 
-<!--<div class="container">
+<div class="container">
 
-    &lt;!&ndash; Modal &ndash;&gt;
+    <!-- Modal -->
     <div class="modal fade" id="add-account-modal" role="dialog">
         <div class="modal-dialog">
 
-            &lt;!&ndash; Modal content &ndash;&gt;
+            <!-- Modal content -->
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -163,7 +163,8 @@
                 </div>
                 <div class="modal-body">
 
-                    <form class="form-horizontal" action="/customer/1/account"
+                    <form class="form-horizontal"
+                          th:action="@{/customer/add/{id}(id=${customer.id})}"
                           method="post">
 
                         <div class="form-group">
@@ -177,7 +178,7 @@
                         <div class="form-group">
                             <label class="col-sm-2 control-label"> Type </label>
                             <div class="col-sm-10">
-                                <select class="form-control" id="type" name="type">
+                                <select class="form-control" id="type" name="accountType">
 
                                     <option value="CHECKING">CHECKING</option>
 
@@ -190,7 +191,7 @@
                         <div class="row">
                             <div class="col-sm-4">
                                 <button type="submit" class="btn btn-primary">Add</button>
-                                <button data-dismiss="modal" type="button" class="btn btn-danger">Cancel</button>
+                                <a data-dismiss="modal" th:href="" class="btn btn-danger">Cancel</a>
                             </div>
                         </div>
                     </form>
@@ -340,7 +341,7 @@
             </div>
         </div>
     </div>
-</div>-->
+</div>
 
 </body>
 </html>

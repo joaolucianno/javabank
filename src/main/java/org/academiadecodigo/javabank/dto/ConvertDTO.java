@@ -22,6 +22,7 @@ public class ConvertDTO {
             accountDTO.setId(account.getId());
             accountDTO.setBalance(account.getBalance());
             accountDTO.setAccountType(account.getAccountType());
+            accountDTO.setCustomerId(customerDTO);
             customerDTO.getAccountDTOList().add(accountDTO);
         }
 
@@ -56,7 +57,7 @@ public class ConvertDTO {
         return customerDTOList;
     }
 
-    public static Customer convertCustomerDTOToCustomer(CustomerDTO customerDTO){
+    public static Customer convertCustomerDTOToNewCustomer(CustomerDTO customerDTO){
         Customer customer = new Customer();
         customer.setFirstName(customerDTO.getFirstName());
         customer.setLastName(customerDTO.getLastName());
@@ -65,4 +66,33 @@ public class ConvertDTO {
 
         return customer;
     }
+
+    public static Customer convertCustomerDTOToCustomerEdit(CustomerDTO customerSubmit, Customer customerEdit){
+
+        if((customerSubmit.getFirstName() != null) && !(customerSubmit.getFirstName().equals(customerEdit.getFirstName()))){
+            customerEdit.setFirstName(customerSubmit.getFirstName());
+        }
+        if((customerSubmit.getLastName() != null) && !(customerSubmit.getLastName().equals(customerEdit.getLastName()))){
+            customerEdit.setLastName(customerSubmit.getLastName());
+        }
+        if((customerSubmit.getEmail() != null) && !(customerSubmit.getEmail().equals(customerEdit.getEmail()))){
+            customerEdit.setEmail(customerSubmit.getEmail());
+        }
+        if((customerSubmit.getPhone() != null) && !(customerSubmit.getPhone().equals(customerEdit.getPhone()))){
+            customerEdit.setPhone(customerSubmit.getPhone());
+        }
+
+        return customerEdit;
+    }
+
+    public static AccountDTO convertAccountTODTO(Account account, CustomerDTO customerDTO){
+        AccountDTO accountDTO = new AccountDTO();
+        accountDTO.setId(account.getId());
+        accountDTO.setBalance(account.getBalance());
+        accountDTO.setAccountType(account.getAccountType());
+        accountDTO.setCustomerId(customerDTO);
+
+        return accountDTO;
+    }
+
 }
