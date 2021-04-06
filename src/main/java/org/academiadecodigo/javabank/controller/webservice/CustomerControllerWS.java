@@ -18,7 +18,7 @@ import java.util.List;
 
 import static org.academiadecodigo.javabank.dto.ConvertDTO.*;
 
-
+@CrossOrigin
 @RequestMapping("/api")
 @RestController
 public class CustomerControllerWS {
@@ -127,6 +127,7 @@ public class CustomerControllerWS {
         return new ResponseEntity<>(convertCustomerWithOutAccounts(customer), HttpStatus.OK);
     }
 
+    @CrossOrigin
     @RequestMapping(method = RequestMethod.DELETE, path = {"/customer/{id}/delete"})
     public ResponseEntity<String> delete(@PathVariable Integer id){
         Customer customer = customerService.get(id);

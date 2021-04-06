@@ -11,7 +11,6 @@ import java.util.List;
 @JsonIgnoreProperties(value = { "accountDTOList" }, ignoreUnknown = true)
 public class CustomerDTO {
     //Fields
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Integer id;
 
     @NotNull(message = "First name is mandatory")
